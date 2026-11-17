@@ -12,10 +12,10 @@
 | 0 | Repo off iCloud Desktop → `~/Developer/deckbook`, baseline gates green | ✅ | 11/16. iCloud had left source and git files as placeholders; all restored, `git fsck` clean |
 | 1a | Workspace scope `@deckbook/*`, root package `deckbook` | ✅ | lockfile keys renamed in place |
 | 1b | User-facing copy incl. D-2 disclaimer (name substitution only) | ✅ | new D-2 wording needs client confirmation |
-| 1c | Mobile identity: name, slug, `deckbook://`, `com.deckbook.app`, SecureStore prefix | ✅ | old EAS `projectId` removed; `eas init` pending (1f) |
+| 1c | Mobile identity: name, slug, `deckbook://`, `com.deckbook.app`, SecureStore prefix | ✅ | new EAS project `@krixament/deckbook` linked 11/16 (1f) |
 | 1d | Local dev infra (`deckbook_dev`, compose names) | ✅ | new compose volumes; migrate + seed on first `docker compose up` |
 | 1e | Docs, design metadata, HANDOFF rename note | ✅ | |
-| 1f | External: GitHub repo, Vercel projects + hosts, `BETTER_AUTH_URL`, Stripe test webhook, R2 CORS, new EAS project, new preview APK, demo redeploy, drop transitional origins | ⬜ | each action confirmed with the builder first. Old names still live: `crewmarket-web`, `crewmarket-demo`, `KelseyProgrammer/crewmarket`, `@krixament/crew-market` |
+| 1f | External: GitHub repo, Vercel projects + hosts, `BETTER_AUTH_URL`, Stripe test webhook, R2 CORS, new EAS project, new preview APK, demo redeploy, drop transitional origins | 🟡 | Done 11/16: GitHub → `KelseyProgrammer/deckbook`; EAS project `@krixament/deckbook` created. Remaining (needs Vercel login): Vercel projects + hosts `crewmarket-web` / `crewmarket-demo`, then `BETTER_AUTH_URL`, Stripe webhook, R2 CORS, `eas.json` API URL, redeploys, new APK, drop transitional origins |
 
 ## Part A — Store Launch
 

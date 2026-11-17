@@ -51,7 +51,10 @@
       "reactCompiler": true
     },
     "extra": {
-      "router": {}
+      "router": {},
+      "eas": {
+        "projectId": "b22a98af-8f27-4af7-927f-a499bd03f0b7"
+      }
     },
     "owner": "krixament"
   }

@@ -6,11 +6,12 @@
 > renamed it **DECKBOOK** in 11/2026. Commit history and the SOW v1 / SOW v2 document titles use the
 > old name. All in-repo names were rewritten on branch `rename/deckbook` (scope `@deckbook/*`, app ids
 > `com.deckbook.app`, scheme `deckbook://`, local DB `deckbook_dev`), and the repo moved off iCloud
-> Desktop to `~/Developer/deckbook`. **Still carrying the old name until the external cutover is
-> done:** Vercel projects/hosts `crewmarket-web` and `crewmarket-demo`, GitHub
-> `KelseyProgrammer/crewmarket`, EAS project `@krixament/crew-market` (retired — `app.json` has no
-> `projectId`; run `eas init` for a new `deckbook` project), and the transitional `crewmarket://`
-> entry in `apps/web/lib/auth.ts` `trustedOrigins`. The pre-rename test APK (`com.crewmarket.app`)
+> Desktop to `~/Developer/deckbook`. **External cutover (step 1f) so far, 11/16/2026:** GitHub repo
+> renamed to `KelseyProgrammer/deckbook` (old URL redirects); new EAS project `@krixament/deckbook`
+> (id b22a98af, linked in `app.json`; the old `@krixament/crew-market` project is retired).
+> **Still carrying the old name:** Vercel projects/hosts `crewmarket-web` and `crewmarket-demo`
+> (and so `BETTER_AUTH_URL`, the Stripe test webhook, R2 CORS and the `eas.json` API URL), and the
+> transitional `crewmarket://` entry in `apps/web/lib/auth.ts` `trustedOrigins`. The pre-rename test APK (`com.crewmarket.app`)
 > is retired once a `com.deckbook.app` build ships. SOW v2 (signed 11/9/2026) is the current scope;
 > the working plan is tracked in `docs/SOW-V2-AUDIT.md`.
 
@@ -33,7 +34,7 @@
 - **Seed data:** 25 synthetic South FL crew profiles (SOW 2.i) — deterministic generator `scripts/generate-seed.mjs` → `apps/web/data/seed-crew.json`.
 - **Booking state machine implemented:** `packages/types/src/booking-machine.ts` — typed transitions, CANCELLED_WEATHER first-class, 48h `DISPUTE_WINDOW` → `PAID_OUT`.
 - **classification-lint implemented** (was stub — exceeds SOW): `pnpm compliance:check` scans copy for M-1 employment-implying language, understands the negated D-2 disclaimer, `cl-allow` escape marker. Currently green.
-- **Pushed to GitHub** (8/28/2026): https://github.com/KelseyProgrammer/crewmarket — origin over HTTPS via `gh` (SSH key is passphrase-locked; `gh auth setup-git` configured as credential helper).
+- **Pushed to GitHub** (8/28/2026): https://github.com/KelseyProgrammer/deckbook (renamed from `crewmarket` 11/16/2026) — origin over HTTPS via `gh` (SSH key is passphrase-locked; `gh auth setup-git` configured as credential helper).
 - **Phase 1 Accounts & Roles built** (8/28/2026): Better Auth 1.7 (email/password) + `packages/db` (Prisma 6 / Postgres, Better Auth core tables + `accountType` CREW|BOAT + `disclaimerAccepted(At)` for D-2). Sign-up (role fork, required verbatim D-2 checkbox, server-side hook rejects without it and stamps time), sign-in, middleware cookie gate, `/account` role-branched shell with honest "next on the build" copy. Local DB: colima + docker compose (`docker-compose.yml`, postgres:17-alpine, db `deckbook_dev`, user/pass `deckbook`). Docker Desktop is NOT installed — use `colima start` first. `.env.local` (root + apps/web, gitignored) carries DATABASE_URL/BETTER_AUTH_SECRET; `packages/db/.env` symlinks root `.env.local` for the Prisma CLI.
 - **Booking flow designed & confirmed (8/28/2026):** PFD-derived "Voyage Ledger" concept — one shared booking document, both roles, all states. Confirmed brief at `docs/BOOKING_BRIEF.md` (scope: direct bookings only; simulated funds-held step until client's Stripe keys arrive; full breadth). **Build starts 8/29/2026.** Critical copy law from the signed SOW: user-facing text says "funds held"/"delayed payout", NEVER "escrow" (escrow characterization is attorney territory, SOW 2.ii/6.i). Also this session: PFD audit 76→81 (brass-text AA token split, crew profile pages w/ D-2, pre-launch hero note); impeccable design hook enabled project-wide.
 - **Weigh-in board world SHIPPED (9/1/2026):** client locked Probe C and the full plan
@@ -249,7 +250,7 @@
   backdates `completedAt` so the next ledger read releases the payout.
 - **DEPLOYED to Vercel (client demo, 9/15/2026): https://crewmarket-web.vercel.app** (test mode).
   Vercel project `crewmarket-web` (Root Directory `apps/web`), Git-connected to
-  KelseyProgrammer/crewmarket (push to main auto-deploys). Postgres = **Neon** via the Vercel
+  KelseyProgrammer/deckbook (push to main auto-deploys). Postgres = **Neon** via the Vercel
   Storage integration (injects `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `POSTGRES_PRISMA_URL`,
   etc., all marked Sensitive so the CLI can't read them). Prisma datasource now reads Neon var
   names: `url = env("POSTGRES_PRISMA_URL")` (pooled), `directUrl = env("DATABASE_URL_UNPOOLED")`
