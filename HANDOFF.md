@@ -12,13 +12,13 @@
 > https://deckbook-demo.vercel.app; `BETTER_AUTH_URL` and the Stripe test webhook (`we_1UFyBb…`, same
 > signing secret) moved to the new web host; new EAS project `@krixament/deckbook` (id b22a98af) with
 > a new cloud keystore for `com.deckbook.app`; preview APK build 22505efc FINISHED (install QR on its
-> expo.dev build page) — not yet installed or sign-in-checked on a device. **Still to do:** add the two new hosts to the R2
-> bucket CORS policy in the Cloudflare dashboard (`docs/STORAGE-SWAP.md` step 3 — until then browser
-> credential uploads only work from the old hosts); then remove the old `crewmarket-*.vercel.app`
-> host aliases and the transitional `crewmarket://` + old-host entries in `apps/web/lib/auth.ts`
-> `trustedOrigins` (this retires the pre-rename APK, which is baked to the old API host).
-> The pre-rename test APK (`com.crewmarket.app`)
-> is retired once a `com.deckbook.app` build ships. SOW v2 (signed 11/9/2026) is the current scope;
+> expo.dev build page). **Cutover closed 11/17/2026:** R2 bucket CORS now lists only the two new
+> hosts (builder, Cloudflare dashboard; browser credential upload verified on the demo host); the
+> old `crewmarket-*.vercel.app` host aliases and the transitional `crewmarket://` + old-host
+> `trustedOrigins` entries are removed, which retires the pre-rename test APK
+> (`com.crewmarket.app`, baked to the old API host). The new APK has not been installed on Android
+> hardware (no device available) — sign-in with the `deckbook://` origin was checked against the
+> live API by request only (200; untrusted origin 403). SOW v2 (signed 11/9/2026) is the current scope;
 > the working plan is tracked in `docs/SOW-V2-AUDIT.md`.
 
 ## Who / what

@@ -17,9 +17,6 @@ export const auth = betterAuth({
   emailAndPassword: { enabled: true },
   trustedOrigins: [
     "deckbook://", // standalone / dev-client builds use the app scheme
-    // TRANSITIONAL (DECKBOOK rename): pre-rename APK scheme. Remove once the old
-    // com.crewmarket.app test build is retired (rename step 1f).
-    "crewmarket://",
     // Expo Go sends origin `exp://<lan-ip>:8081`. The @better-auth/expo plugin only
     // auto-trusts "exp://" when NODE_ENV==="development"; on Vercel (production) it
     // doesn't, so we trust it explicitly for the Expo Go device pass. DEV/DEMO ONLY —
@@ -29,10 +26,6 @@ export const auth = betterAuth({
     "http://localhost:3002",
     "https://deckbook-web.vercel.app",
     "https://deckbook-demo.vercel.app", // DEV/DEMO ONLY — web-parity demo, remove before launch
-    // TRANSITIONAL (DECKBOOK rename): pre-rename hosts, still attached to the Vercel
-    // projects. Remove together with the old host aliases (rename step 1f).
-    "https://crewmarket-web.vercel.app",
-    "https://crewmarket-demo.vercel.app",
   ],
   user: {
     additionalFields: {
