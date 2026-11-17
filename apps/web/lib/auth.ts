@@ -27,8 +27,12 @@ export const auth = betterAuth({
     "exp://",
     "http://localhost:3000",
     "http://localhost:3002",
+    "https://deckbook-web.vercel.app",
+    "https://deckbook-demo.vercel.app", // DEV/DEMO ONLY — web-parity demo, remove before launch
+    // TRANSITIONAL (DECKBOOK rename): pre-rename hosts, still attached to the Vercel
+    // projects. Remove together with the old host aliases (rename step 1f).
     "https://crewmarket-web.vercel.app",
-    "https://crewmarket-demo.vercel.app", // DEV/DEMO ONLY — web-parity demo, remove before launch
+    "https://crewmarket-demo.vercel.app",
   ],
   user: {
     additionalFields: {

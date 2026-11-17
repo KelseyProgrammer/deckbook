@@ -1,7 +1,7 @@
 # Web demo — shipping the Expo build as a shareable link
 
-> **Live:** https://crewmarket-demo.vercel.app (deployed 2026-10-01 via the recipe
-> below; Vercel project `crewmarket-demo`, git auto-deploy deliberately disconnected —
+> **Live:** https://deckbook-demo.vercel.app (deployed 2026-10-01 via the recipe
+> below; Vercel project `deckbook-demo`, git auto-deploy deliberately disconnected —
 > redeploys are CLI-only, re-export then `vercel deploy --prod` from `apps/mobile/dist`).
 
 Branch `web-parity`. This is the mobile app running in a browser (react-native-web
@@ -21,7 +21,7 @@ the whole audit below ran through it.)
 
 ## Fastest shareable link (Vercel static site + rewrite)
 
-The API already lives at `https://crewmarket-web.vercel.app` (test mode). Stand the
+The API already lives at `https://deckbook-web.vercel.app` (test mode). Stand the
 web bundle up as a **second** Vercel project that proxies its own `/api/*` to it.
 
 1. **Build the bundle**, pointing it at its own origin (relative same-origin):
@@ -31,7 +31,7 @@ web bundle up as a **second** Vercel project that proxies its own `/api/*` to it
    EXPO_PUBLIC_API_URL=https://<DEMO_HOST> npx expo export --platform web --output-dir dist
    ```
 
-   Use the final demo hostname for `<DEMO_HOST>` (e.g. `crewmarket-demo.vercel.app`).
+   Use the final demo hostname for `<DEMO_HOST>` (e.g. `deckbook-demo.vercel.app`).
    All API/auth calls then go to `<DEMO_HOST>/api/*`, which the rewrite forwards.
 
    > ⚠️ **INCIDENT 10/8/2026 — never bake the audit-proxy URL.** The 10/1 deploy was
@@ -48,7 +48,7 @@ web bundle up as a **second** Vercel project that proxies its own `/api/*` to it
    ```json
    {
      "rewrites": [
-       { "source": "/api/:path*", "destination": "https://crewmarket-web.vercel.app/api/:path*" }
+       { "source": "/api/:path*", "destination": "https://deckbook-web.vercel.app/api/:path*" }
      ]
    }
    ```
@@ -100,7 +100,7 @@ real shareable link.
 
 ## Env vars / keys that must be set for the deploy
 
-Everything is **test mode** — no real charges. The API host (`crewmarket-web`
+Everything is **test mode** — no real charges. The API host (`deckbook-web`
 project) already carries these from the existing deploy; the demo build only needs
 `EXPO_PUBLIC_API_URL` at export time.
 

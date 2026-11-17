@@ -10,13 +10,13 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://crewmarket-web.vercel.app"
+        "EXPO_PUBLIC_API_URL": "https://deckbook-web.vercel.app"
       }
     },
     "production": {
       "autoIncrement": true,
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://crewmarket-web.vercel.app"
+        "EXPO_PUBLIC_API_URL": "https://deckbook-web.vercel.app"
       }
     }
   }

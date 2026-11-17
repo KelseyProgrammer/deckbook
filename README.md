@@ -5,7 +5,7 @@ and licensed captains — list their services, credentials, and availability. **
 private owners, charter operations, and tournament programs — post jobs and book crew,
 with payment held until the trip is done.
 
-> **Live demo:** [crewmarket-demo.vercel.app](https://crewmarket-demo.vercel.app) —
+> **Live demo:** [deckbook-demo.vercel.app](https://deckbook-demo.vercel.app) —
 > the mobile app running in the browser (test mode, synthetic data). Click through the
 > job board, crew profiles, and booking flow.
 

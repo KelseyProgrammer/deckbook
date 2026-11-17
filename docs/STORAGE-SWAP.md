@@ -2,7 +2,7 @@
 
 > **DONE 10/7/2026.** Bucket `credential-docs` (ENAM) live on the client-side
 > Cloudflare account, Object-R/W scoped token, CORS policy set, six `S3_*` vars on
-> crewmarket-web production. Full verify checklist below passed (scripted against
+> deckbook-web production. Full verify checklist below passed (scripted against
 > production). One code fix came out of it: `ensureBucket` now probes with
 > HeadBucket instead of unconditionally creating (the scoped token has no
 > CreateBucket right — commit `32fe10c`). Kept as the runbook for the eventual
@@ -11,7 +11,7 @@
 The app's storage layer (`apps/web/lib/credential-storage.ts`) is already a pure env
 swap: any S3-compatible store works via `S3_*` vars. Dev uses MinIO (docker compose);
 the deployed API has **no object store**, so credential uploads error on
-crewmarket-web / the crewmarket-demo link. This doc is the ~15-minute recipe to fix
+deckbook-web / the deckbook-demo link. This doc is the ~15-minute recipe to fix
 that. **Recommended provider: Cloudflare R2** — S3-compatible (zero code change),
 free tier (10 GB) covers the demo era, no egress fees, simplest token model. AWS S3
 works identically if the client prefers it (same vars, plus region/IAM specifics).
@@ -33,8 +33,8 @@ works identically if the client prefers it (same vars, plus region/IAM specifics
    [
      {
        "AllowedOrigins": [
-         "https://crewmarket-demo.vercel.app",
-         "https://crewmarket-web.vercel.app"
+         "https://deckbook-demo.vercel.app",
+         "https://deckbook-web.vercel.app"
        ],
        "AllowedMethods": ["PUT", "GET", "HEAD"],
        "AllowedHeaders": ["content-type"],
@@ -47,7 +47,7 @@ works identically if the client prefers it (same vars, plus region/IAM specifics
 
 ## Point the deployed API at it
 
-Set on the `crewmarket-web` Vercel project (production), all marked Sensitive:
+Set on the `deckbook-web` Vercel project (production), all marked Sensitive:
 
 ```bash
 vercel env add S3_ENDPOINT production          # https://<ACCOUNT_ID>.r2.cloudflarestorage.com
@@ -58,17 +58,17 @@ vercel env add S3_REGION production            # auto   (R2's required region va
 vercel env add S3_FORCE_PATH_STYLE production  # true   (R2 endpoint is account-scoped; bucket goes in the path)
 ```
 
-Then redeploy the API (`vercel redeploy` on crewmarket-web, or push to main).
+Then redeploy the API (`vercel redeploy` on deckbook-web, or push to main).
 No code change: the module already branches on `S3_ENDPOINT` + static keys, and its
 `ensureBucket()` tolerates the bucket pre-existing.
 
 ## Verify (test accounts, synthetic docs only — never real credentials)
 
-1. Live demo (crewmarket-demo.vercel.app) → sign in `mate@example.com` → Account →
+1. Live demo (deckbook-demo.vercel.app) → sign in `mate@example.com` → Account →
    Credentials → **Choose file** → upload a synthetic PDF → row appears
    self-reported. (This exercises presign → browser PUT (CORS) → HeadObject confirm.)
 2. **View** on the row opens the doc (presigned GET, 60s expiry).
-3. `/admin/credentials` on crewmarket-web (admin allowlist) → verify the row → badge
+3. `/admin/credentials` on deckbook-web (admin allowlist) → verify the row → badge
    flips on the profile (V-1: `verifiedAt` admin-set only).
 4. **Remove** the row → gone (S3-first delete ordering).
 5. Spot-check privacy: the bucket stays private — opening the object URL *without*

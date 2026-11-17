@@ -97,13 +97,13 @@ describe("POST /api/bookings/[id]/checkout", () => {
   });
 
   it("uses BETTER_AUTH_URL as the return base when set", async () => {
-    process.env.BETTER_AUTH_URL = "https://crewmarket-web.vercel.app";
+    process.env.BETTER_AUTH_URL = "https://deckbook-web.vercel.app";
     await call();
     expect(seams.createBookingCheckout).toHaveBeenCalledWith(
       expect.anything(),
       {
-        successUrl: "https://crewmarket-web.vercel.app/bookings/b1?paid=pending",
-        cancelUrl: "https://crewmarket-web.vercel.app/bookings/b1",
+        successUrl: "https://deckbook-web.vercel.app/bookings/b1?paid=pending",
+        cancelUrl: "https://deckbook-web.vercel.app/bookings/b1",
       }
     );
   });
