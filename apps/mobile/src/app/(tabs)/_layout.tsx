@@ -61,13 +61,13 @@ export default function TabsLayout() {
 function Wordmark() {
   return (
     <View
-      style={{ flexDirection: "row", alignItems: "center", gap: 8 }}
+      style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
       accessible
       accessibilityRole="header"
       accessibilityLabel="DECKBOOK"
     >
-      <Image source={require("../../../assets/images/logo-mark-white.png")} style={{ width: 36, height: 32 }} />
-      <Image source={require("../../../assets/images/logo-wordmark-white.png")} style={{ width: 101, height: 18 }} />
+      <Image source={require("../../../assets/images/logo-mark-white.png")} style={{ width: 45, height: 40 }} />
+      <Image source={require("../../../assets/images/logo-wordmark-white.png")} style={{ width: 135, height: 24 }} />
     </View>
   );
 }

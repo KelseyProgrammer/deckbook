@@ -80,8 +80,8 @@ png(`${IMG}/splash-icon.png`, compose({ art: mark, w: mark.w, h: mark.h, widthFr
 png(`${IMG}/favicon.png`, compose({ art: mark, w: 64, widthFrac: 0.84, bg: NAVY, radius: 12 }), 48);
 // In-app header logo (apps/mobile/src/app/(tabs)/_layout.tsx) — white on the navy header, @3x.
 const wordmark = load("deckbook-wordmark");
-png(`${IMG}/logo-mark-white.png`, compose({ art: mark, w: mark.w, h: mark.h, widthFrac: 1 }), 108);
-png(`${IMG}/logo-wordmark-white.png`, compose({ art: wordmark, w: wordmark.w, h: wordmark.h, widthFrac: 1 }), 303);
+png(`${IMG}/logo-mark-white.png`, compose({ art: mark, w: mark.w, h: mark.h, widthFrac: 1 }), 135);
+png(`${IMG}/logo-wordmark-white.png`, compose({ art: wordmark, w: wordmark.w, h: wordmark.h, widthFrac: 1 }), 405);
 // iOS Icon Composer layer (apps/mobile/assets/expo.icon): white mark, navy fill set in icon.json.
 out(
   "apps/mobile/assets/expo.icon/Assets/deckbook-mark.svg",
