@@ -213,7 +213,7 @@ Three hues plus disciplined neutrals; navy and white are the fields, brass is th
   primary-button fill (hover deepens to #7d5f1b). Never graphic brass for small text on white.
 
 ### Secondary
-- **Brass Bright** (#d7b36a): Brass on navy — the wordmark's "Market", the single `em` word in
+- **Brass Bright** (#d7b36a): Brass on navy — the single `em` word in
   display headlines, hovered nav links and ghost-navy borders, focus outlines on navy fields, the
   hovered row's rate and open-day cells, and the text-selection highlight. Never a background fill.
 
@@ -235,8 +235,8 @@ Three hues plus disciplined neutrals; navy and white are the fields, brass is th
 ### Named Rules
 **The Brass Ledger Rule.** Brass carries exactly four meanings and no others: **verification**
 (the seal coin and brass-engrave edging), **the primary action**, **the availability strip's
-open-day fill** (bookable-state data, not mood), and **the display accent** (the wordmark's
-"Market"; at most one `em` word per display headline). Any fifth meaning dilutes all four. Small
+open-day fill** (bookable-state data, not mood), and **the display accent** (at most
+one `em` word per display headline). Any fifth meaning dilutes all four. Small
 text on white always uses the text-grade #8a6a1e.
 
 **The Two-Field Rule.** Every section is either navy field or white-on-board-ground; the two never
@@ -266,8 +266,7 @@ uppercase. The pairing reads tournament-official, not SaaS.
 - **Title Row** (500, clamp(22px, 2.6vw, 32px), 1.0): Crew names on board rows.
 - **Title Page** (500, 32px, 1.05): Profile and account page names.
 - **Headline** (500, 28px, ~1.2): Section headings and the auth panel title.
-- **Title Minor** (500, 18–22px): Account status lines, role-fork plate names, the 22px wordmark
-  (letter-spacing 0.04em).
+- **Title Minor** (500, 18–22px): Account status lines, role-fork plate names.
 - **Body** (400 Archivo, 16px, 1.55): Prose; hero subtitle at 17px; UI text at 15px; meta at
   13–14px; measure 62ch (`--measure`).
 - **Label** (400 Martian Mono, 10–12px, UPPERCASE): Nav links (12px/0.14em), badges, form labels,
@@ -341,9 +340,11 @@ what makes it read as a seal. No skews, blobs, or organic shapes.
 ## Components
 
 ### Masthead
-Navy bar with brass-engrave bottom hairline. Oswald 500 uppercase wordmark at 22px — "Crew" in
-white, "Market" in Brass Bright (a Brass Ledger display-accent slot). Mono uppercase nav links
-(12px/0.14em) in Mist, Brass Bright on hover. Baseline-aligned single row; authored two-row wrap
+Navy bar with brass-engrave bottom hairline. The logo sits left: the compass-and-sportfisher mark
+(50×44px) beside the serif "Deckbook" wordmark (22px tall), both White Crisp — the logo never takes
+brass. Vectors live in `assets/brand/` (traced from the client-supplied logo, 11/17/2026); every
+icon, splash and share raster is regenerated from them by `scripts/build-brand-assets.mjs`. Mono uppercase nav links
+(12px/0.14em) in Mist, Brass Bright on hover. Centre-aligned single row; authored two-row wrap
 at 560px.
 
 ### Buttons

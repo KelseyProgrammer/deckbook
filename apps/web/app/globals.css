@@ -32,20 +32,29 @@ a { color: inherit; }
   border-bottom: 1px solid var(--brass-engrave);
 }
 .masthead__row {
-  display: flex; align-items: baseline; justify-content: space-between;
-  padding: var(--s-4) 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--s-3) 0;
   gap: var(--s-4);
 }
+/* Logo: vectors in /public/brand (source: assets/brand, scripts/build-brand-assets.mjs).
+   Drawn as masks so the mark takes the masthead's text colour. */
 .wordmark {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 22px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
   color: var(--white-crisp);
   text-decoration: none;
 }
-.wordmark b { color: var(--brass-bright); font-weight: inherit; }
+.wordmark__mark,
+.wordmark__type {
+  display: block;
+  flex: none;
+  background-color: currentColor;
+  -webkit-mask: var(--logo) center / contain no-repeat;
+  mask: var(--logo) center / contain no-repeat;
+}
+.wordmark__mark { --logo: url("/brand/deckbook-mark.svg"); width: 50px; height: 44px; }
+.wordmark__type { --logo: url("/brand/deckbook-wordmark.svg"); width: 124px; height: 22px; }
 .masthead__nav { display: flex; gap: var(--s-5); }
 .masthead__nav a {
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em;

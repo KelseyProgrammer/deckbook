@@ -36,7 +36,10 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
         <header className="masthead on-navy">
           <Container wide>
             <div className="masthead__row">
-              <Link className="wordmark" href="/">Crew <b>Market</b></Link>
+              <Link className="wordmark" href="/" aria-label="DECKBOOK home">
+                <span className="wordmark__mark" aria-hidden="true" />
+                <span className="wordmark__type" aria-hidden="true" />
+              </Link>
               <nav className="masthead__nav" aria-label="Primary">
                 <Link href="/directory">Directory</Link>
                 <Link href="/sign-up?role=CREW">List services</Link>

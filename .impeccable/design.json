@@ -243,7 +243,7 @@
       },
       "title-minor": {
         "displayName": "Minor Title",
-        "purpose": "Account status, role-fork plate names, 22px wordmark."
+        "purpose": "Account status, role-fork plate names."
       },
       "title-plate": {
         "displayName": "Plate Title",
@@ -380,8 +380,8 @@
       "name": "Masthead",
       "kind": "nav",
       "refersTo": "masthead",
-      "description": "Navy bar with brass-engrave seam; wordmark Market in Brass Bright; mono nav in Mist warming to Brass Bright.",
-      "html": "<header class=\"ds-masthead\"><a class=\"ds-wordmark\" href=\"#\">Crew <b>Market</b></a><nav class=\"ds-mast-nav\"><a href=\"#\">Directory</a><a href=\"#\">List services</a><a href=\"#\">Book crew</a><a href=\"#\">Account</a></nav></header>",
+      "description": "Navy bar with brass-engrave seam; logo (compass mark + serif Deckbook wordmark) in White Crisp; mono nav in Mist warming to Brass Bright.",
+      "html": "<header class=\"ds-masthead\"><a class=\"ds-wordmark\" href=\"#\">Deckbook</a><nav class=\"ds-mast-nav\"><a href=\"#\">Directory</a><a href=\"#\">List services</a><a href=\"#\">Book crew</a><a href=\"#\">Account</a></nav></header>",
       "css": ".ds-masthead { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 16px 24px; background: #0a1d30; border-bottom: 1px solid rgba(169, 130, 47, 0.45); } .ds-wordmark { font-family: Oswald, Archivo, sans-serif; font-weight: 500; font-size: 22px; letter-spacing: 0.04em; text-transform: uppercase; color: #f8fafb; text-decoration: none; } .ds-wordmark b { color: #d7b36a; font-weight: inherit; } .ds-mast-nav { display: flex; gap: 24px; } .ds-mast-nav a { font-family: 'Martian Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: #8fa6ba; } .ds-mast-nav a:hover { color: #d7b36a; } .ds-mast-nav a:focus-visible { outline: 2px solid #d7b36a; outline-offset: 2px; }"
     }
   ],

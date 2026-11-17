@@ -1,11 +1,10 @@
 import { Tabs } from "expo-router";
-import { Text } from "react-native";
+import { Image, View } from "react-native";
 import { color, font } from "../../../lib/tokens";
 import { BoardGlyph, HelmGlyph, LogbookGlyph } from "../../../components/engravings";
 
 /* Board / Bookings / Account tab bar (slice 3, Task 5). Navy bar with a brass
-   active tint and the same masthead wordmark as the header band — the Brass
-   Ledger's display accent (brass on navy is Brass Bright; root DESIGN.md).
+   active tint and the same masthead logo as the web header band (root DESIGN.md).
    Fonts load once in the root _layout; this navigator only styles chrome.
    10/7 polish pass: placeholder dots replaced with chart-room engraved glyphs
    (board plate / ship's log / helm — mist at rest, Brass Bright active) and
@@ -57,14 +56,18 @@ export default function TabsLayout() {
   );
 }
 
-// The web masthead wordmark: "CREW" white, "MARKET" Brass Bright.
+// The web masthead logo: compass mark + "Deckbook" wordmark, white on navy.
+// Rasters come from assets/brand via scripts/build-brand-assets.mjs.
 function Wordmark() {
   return (
-    <Text
-      style={{ fontFamily: font.display, fontSize: 17, letterSpacing: 1.2, color: color.whiteCrisp }}
+    <View
+      style={{ flexDirection: "row", alignItems: "center", gap: 8 }}
+      accessible
       accessibilityRole="header"
+      accessibilityLabel="DECKBOOK"
     >
-      CREW <Text style={{ color: color.brassBright }}>MARKET</Text>
-    </Text>
+      <Image source={require("../../../assets/images/logo-mark-white.png")} style={{ width: 36, height: 32 }} />
+      <Image source={require("../../../assets/images/logo-wordmark-white.png")} style={{ width: 101, height: 18 }} />
+    </View>
   );
 }
