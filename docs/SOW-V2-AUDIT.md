@@ -15,7 +15,7 @@
 | 1c | Mobile identity: name, slug, `deckbook://`, `com.deckbook.app`, SecureStore prefix | ✅ | new EAS project `@krixament/deckbook` linked 11/16 (1f) |
 | 1d | Local dev infra (`deckbook_dev`, compose names) | ✅ | new compose volumes; migrate + seed on first `docker compose up` |
 | 1e | Docs, design metadata, HANDOFF rename note | ✅ | |
-| 1f | External: GitHub repo, Vercel projects + hosts, `BETTER_AUTH_URL`, Stripe test webhook, R2 CORS, new EAS project, new preview APK, demo redeploy, drop transitional origins | 🟡 | Done 11/16: GitHub → `KelseyProgrammer/deckbook`; EAS project `@krixament/deckbook` created. Remaining (needs Vercel login): Vercel projects + hosts `crewmarket-web` / `crewmarket-demo`, then `BETTER_AUTH_URL`, Stripe webhook, R2 CORS, `eas.json` API URL, redeploys, new APK, drop transitional origins |
+| 1f | External: GitHub repo, Vercel projects + hosts, `BETTER_AUTH_URL`, Stripe test webhook, R2 CORS, new EAS project, new preview APK, demo redeploy, drop transitional origins | 🟡 | Done 11/16: GitHub → `KelseyProgrammer/deckbook`; Vercel `deckbook-web` / `deckbook-demo` + new hosts live; `BETTER_AUTH_URL`; Stripe test webhook URL; web + demo redeployed and smoke-checked; EAS project `@krixament/deckbook`; new preview APK build. Remaining: R2 CORS origins (Cloudflare dashboard, builder), then drop the old `crewmarket-*` hosts and transitional `trustedOrigins` entries |
 
 ## Part A — Store Launch
 

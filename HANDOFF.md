@@ -6,12 +6,17 @@
 > renamed it **DECKBOOK** in 11/2026. Commit history and the SOW v1 / SOW v2 document titles use the
 > old name. All in-repo names were rewritten on branch `rename/deckbook` (scope `@deckbook/*`, app ids
 > `com.deckbook.app`, scheme `deckbook://`, local DB `deckbook_dev`), and the repo moved off iCloud
-> Desktop to `~/Developer/deckbook`. **External cutover (step 1f) so far, 11/16/2026:** GitHub repo
-> renamed to `KelseyProgrammer/deckbook` (old URL redirects); new EAS project `@krixament/deckbook`
-> (id b22a98af, linked in `app.json`; the old `@krixament/crew-market` project is retired).
-> **Still carrying the old name:** Vercel projects/hosts `crewmarket-web` and `crewmarket-demo`
-> (and so `BETTER_AUTH_URL`, the Stripe test webhook, R2 CORS and the `eas.json` API URL), and the
-> transitional `crewmarket://` entry in `apps/web/lib/auth.ts` `trustedOrigins`. The pre-rename test APK (`com.crewmarket.app`)
+> Desktop to `~/Developer/deckbook`. **External cutover (step 1f), 11/16/2026:** GitHub repo
+> renamed to `KelseyProgrammer/deckbook` (old URL redirects; Vercel git link followed it); Vercel
+> projects renamed `deckbook-web` / `deckbook-demo`, live at https://deckbook-web.vercel.app and
+> https://deckbook-demo.vercel.app; `BETTER_AUTH_URL` and the Stripe test webhook (`we_1UFyBb…`, same
+> signing secret) moved to the new web host; new EAS project `@krixament/deckbook` (id b22a98af) with
+> a new cloud keystore for `com.deckbook.app`. **Still to do:** add the two new hosts to the R2
+> bucket CORS policy in the Cloudflare dashboard (`docs/STORAGE-SWAP.md` step 3 — until then browser
+> credential uploads only work from the old hosts); then remove the old `crewmarket-*.vercel.app`
+> host aliases and the transitional `crewmarket://` + old-host entries in `apps/web/lib/auth.ts`
+> `trustedOrigins` (this retires the pre-rename APK, which is baked to the old API host).
+> The pre-rename test APK (`com.crewmarket.app`)
 > is retired once a `com.deckbook.app` build ships. SOW v2 (signed 11/9/2026) is the current scope;
 > the working plan is tracked in `docs/SOW-V2-AUDIT.md`.
 
