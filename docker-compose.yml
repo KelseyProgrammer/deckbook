@@ -3,28 +3,28 @@
 services:
   postgres:
     image: postgres:17-alpine
-    container_name: crewmarket-postgres
+    container_name: deckbook-postgres
     environment:
-      POSTGRES_USER: crewmarket
-      POSTGRES_PASSWORD: crewmarket # local dev only; hosted DB credentials come from the host provider
-      POSTGRES_DB: crewmarket_dev
+      POSTGRES_USER: deckbook
+      POSTGRES_PASSWORD: deckbook # local dev only; hosted DB credentials come from the host provider
+      POSTGRES_DB: deckbook_dev
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U crewmarket -d crewmarket_dev"]
+      test: ["CMD-SHELL", "pg_isready -U deckbook -d deckbook_dev"]
       interval: 5s
       timeout: 3s
       retries: 10
 
   minio:
     image: minio/minio
-    container_name: crewmarket-minio
+    container_name: deckbook-minio
     command: server /data --console-address ":9001"
     environment:
-      MINIO_ROOT_USER: crewmarket
-      MINIO_ROOT_PASSWORD: crewmarket-dev # local dev only; real AWS creds come from the client (env swap)
+      MINIO_ROOT_USER: deckbook
+      MINIO_ROOT_PASSWORD: deckbook-dev # local dev only; real AWS creds come from the client (env swap)
     ports:
       - "9000:9000"
       - "9001:9001"
