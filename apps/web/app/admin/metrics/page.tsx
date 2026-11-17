@@ -13,7 +13,7 @@ import { computeMetrics } from "../../../lib/admin-metrics";
 // self-documenting defense-in-depth: never statically cached
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "Metrics — Crew Market" };
+export const metadata = { title: "Metrics — DECKBOOK" };
 
 const STATE_LABELS: Record<BookingState, string> = {
   REQUESTED: "Requested",

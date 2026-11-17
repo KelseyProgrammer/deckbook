@@ -10,7 +10,7 @@ const body = Archivo({ subsets: ["latin"], weight: ["400", "600"], variable: "--
 const mono = Martian_Mono({ subsets: ["latin"], weight: "400", variable: "--next-font-mono" });
 
 export const metadata = {
-  title: "Crew Market — Sportfishing Crew Directory & Booking",
+  title: "DECKBOOK — Sportfishing Crew Directory & Booking",
   description:
     "Find and book professional sportfishing crew. A marketplace — not an employer or crewing agency.",
 };
@@ -51,7 +51,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
           <Container wide>
             {/* Rule D-2 — persistent on every page */}
             <DisclaimerD2 />
-            <p className="footer__legal">© 2026 CREW MARKET · SOUTH FLORIDA FISHERY · SYNTHETIC DEMO DATA</p>
+            <p className="footer__legal">© 2026 DECKBOOK · SOUTH FLORIDA FISHERY · SYNTHETIC DEMO DATA</p>
           </Container>
         </footer>
       </body>

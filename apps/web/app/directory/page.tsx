@@ -19,7 +19,7 @@ const ROLE_OPTIONS = [
 
 type Search = { role?: string; port?: string; date?: string; verified?: string };
 
-export const metadata = { title: "Crew Directory — Crew Market" };
+export const metadata = { title: "Crew Directory — DECKBOOK" };
 
 export default async function Directory({ searchParams }: { searchParams: Promise<Search> }) {
   const { role = "", port = "", date = "", verified = "" } = await searchParams;

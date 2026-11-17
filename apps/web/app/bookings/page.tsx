@@ -15,7 +15,7 @@ import { prisma } from "@deckbook/db";
 /* Bookings index (docs/BOOKING_BRIEF.md): registry rows, role-branched.
    No ranks, no urgency — a census of voyages, newest first. */
 
-export const metadata = { title: "Bookings — Crew Market" };
+export const metadata = { title: "Bookings — DECKBOOK" };
 
 export default async function Bookings() {
   const user = await sessionUser();

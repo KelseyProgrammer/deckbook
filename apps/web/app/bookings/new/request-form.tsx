@@ -130,7 +130,7 @@ export function RequestForm({
 
       <p className="field__hint">
         This request forms a booking agreement between <b>{boatName}</b> and{" "}
-        <b>{crew.displayName}</b>. Crew Market keeps the ledger and holds the funds; it is not
+        <b>{crew.displayName}</b>. DECKBOOK keeps the ledger and holds the funds; it is not
         a party to the agreement. Cancellation and refund terms are stated in the agreement.
       </p>
 
@@ -150,7 +150,7 @@ export function RequestForm({
       </button>
       <p className="field__hint">
         {crew.displayName.split(" ")[0]} can accept or decline freely — declining never costs
-        crew anything on Crew Market.
+        crew anything on DECKBOOK.
       </p>
     </form>
   );

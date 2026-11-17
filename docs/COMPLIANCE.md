@@ -1,4 +1,4 @@
-# COMPLIANCE.md — Crew Market
+# COMPLIANCE.md — DECKBOOK
 
 > Engineering policy, not legal advice. An attorney (employment + maritime) reviews before launch.
 
@@ -29,7 +29,7 @@ The single biggest legal risk in this product is **contractor misclassification*
 ## 4. Data & privacy (rule prefix: D)
 
 - **D-1** Standard PII care: TLS everywhere, encrypted-at-rest Postgres, no PII in logs, MFA for admins. (No PHI in scope — do not collect medical data; drug-test status, if ever requested by charter operators, is an attorney conversation first, not a schema field.)
-- **D-2 Mandatory disclaimers:** "Crew Market is a directory and booking marketplace. We are not an employer, crewing agency, or vessel operator. Vessel owners are solely responsible for crew selection, vessel operation, and legal compliance including insurance." Placement: signup (checkbox), every profile, booking flow.
+- **D-2 Mandatory disclaimers:** "DECKBOOK is a directory and booking marketplace. We are not an employer, crewing agency, or vessel operator. Vessel owners are solely responsible for crew selection, vessel operation, and legal compliance including insurance." Placement: signup (checkbox), every profile, booking flow.
 - **D-3** Location data (home port, current region) is coarse by default — never live GPS of crew members.
 - **D-4** Insurance fields: boats attest to P&I coverage incl. crew liability at booking; stored as attestation with date. The platform requires the attestation, not proof (v1) — upgrading to verified COIs is a roadmap item.
 

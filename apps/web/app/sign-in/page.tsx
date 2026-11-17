@@ -1,7 +1,7 @@
 import { Container } from "@deckbook/ui";
 import { SignInForm } from "../../components/auth-forms";
 
-export const metadata = { title: "Sign in — Crew Market" };
+export const metadata = { title: "Sign in — DECKBOOK" };
 
 export default async function SignIn({ searchParams }: { searchParams: Promise<{ from?: string }> }) {
   const { from } = await searchParams;
@@ -9,7 +9,7 @@ export default async function SignIn({ searchParams }: { searchParams: Promise<{
     <main className="auth">
       <Container>
         <div className="auth__panel">
-          <span className="eyebrow">CREW MARKET REGISTRY · SIGN IN</span>
+          <span className="eyebrow">DECKBOOK REGISTRY · SIGN IN</span>
           <h1 className="auth__title">Welcome back</h1>
           <SignInForm from={from} />
         </div>

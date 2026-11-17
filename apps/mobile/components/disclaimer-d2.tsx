@@ -8,7 +8,7 @@ import { color, font, space } from "../lib/tokens";
 export function DisclaimerD2() {
   return (
     <Text style={styles.text}>
-      Crew Market is a directory and booking marketplace. We are not an employer, crewing agency, or
+      DECKBOOK is a directory and booking marketplace. We are not an employer, crewing agency, or
       vessel operator. Vessel owners are solely responsible for crew selection, vessel operation, and
       legal compliance including insurance.
     </Text>

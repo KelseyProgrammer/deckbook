@@ -11,7 +11,7 @@ import { PayoutsSection } from "./payouts-section";
    Copy stays honest about build state: live actions link out, unbuilt phases are
    named as upcoming, nothing is faked. */
 
-export const metadata = { title: "Account — Crew Market" };
+export const metadata = { title: "Account — DECKBOOK" };
 
 const SHELLS = {
   CREW: {

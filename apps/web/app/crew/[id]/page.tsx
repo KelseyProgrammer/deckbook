@@ -62,7 +62,7 @@ function fmtDate(iso: string) {
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const crew = profiles.find((p) => p.id === id);
-  return { title: crew ? `${crew.displayName} — Crew Market Registry` : "Crew Market" };
+  return { title: crew ? `${crew.displayName} — DECKBOOK Registry` : "DECKBOOK" };
 }
 
 export default async function CrewProfile({ params }: { params: Promise<{ id: string }> }) {

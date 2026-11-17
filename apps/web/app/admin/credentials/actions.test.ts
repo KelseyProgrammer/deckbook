@@ -20,7 +20,7 @@ vi.mock("next/navigation", () => ({ redirect: seams.redirect }));
 
 import { setCredentialVerified, viewCredentialDocAsAdmin } from "./actions";
 
-const ADMIN = { id: "a1", email: "admin@crewmarket.test", accountType: "BOAT" };
+const ADMIN = { id: "a1", email: "admin@deckbook.test", accountType: "BOAT" };
 const CREW = { id: "u1", email: "crew@example.test", accountType: "CREW" };
 const DOC = { id: "doc123", profileId: "p1", s3Key: "credentials/p1/doc123.pdf" };
 
@@ -32,7 +32,7 @@ function form(entries: Record<string, string>) {
 
 beforeEach(() => {
   vi.clearAllMocks();
-  vi.stubEnv("ADMIN_EMAILS", "admin@crewmarket.test");
+  vi.stubEnv("ADMIN_EMAILS", "admin@deckbook.test");
 });
 afterEach(() => vi.unstubAllEnvs());
 

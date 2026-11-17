@@ -8,7 +8,7 @@ import { AvailabilityStrip } from "./availability";
 export function VerifiedSeal({ small = false }: { small?: boolean }) {
   const size = small ? 20 : 28;
   return (
-    <span className="seal" title="Credentials verified by Crew Market admin review">
+    <span className="seal" title="Credentials verified by DECKBOOK admin review">
       <svg width={size} height={size} viewBox="0 0 28 28" aria-hidden="true" focusable="false">
         <circle cx="14" cy="14" r="12.5" fill="none" stroke="currentColor" strokeWidth="1.4" />
         <circle cx="14" cy="14" r="9.5" fill="none" stroke="currentColor" strokeWidth="0.8" strokeDasharray="1.6 2.2" />
@@ -24,7 +24,7 @@ export function VerifiedSeal({ small = false }: { small?: boolean }) {
 export function DisclaimerD2() {
   return (
     <p className="disclaimer-d2">
-      Crew Market is a directory and booking marketplace. We are not an employer, crewing agency, or
+      DECKBOOK is a directory and booking marketplace. We are not an employer, crewing agency, or
       vessel operator. Vessel owners are solely responsible for crew selection, vessel operation, and
       legal compliance including insurance.
     </p>

@@ -10,7 +10,7 @@ import { RequestForm } from "./request-form";
    block derives mechanically from crew-listed rates (M-2) with the platform fee
    itemized before anything is sent (P-3/R4 — no new numbers at funding). */
 
-export const metadata = { title: "Request a booking — Crew Market" };
+export const metadata = { title: "Request a booking — DECKBOOK" };
 
 export default async function NewBooking({
   searchParams,

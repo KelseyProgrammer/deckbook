@@ -45,9 +45,9 @@ describe("s3KeyFor", () => {
 
 describe("isAdminEmail", () => {
   it("matches against the comma-separated allowlist, case-insensitive, trimmed", () => {
-    const list = "ops@crewmarket.test, Admin@Example.com";
+    const list = "ops@deckbook.test, Admin@Example.com";
     expect(isAdminEmail("admin@example.com", list)).toBe(true);
-    expect(isAdminEmail("ops@crewmarket.test", list)).toBe(true);
+    expect(isAdminEmail("ops@deckbook.test", list)).toBe(true);
     expect(isAdminEmail("mate@example.com", list)).toBe(false);
   });
   it("empty or missing allowlist admits nobody", () => {

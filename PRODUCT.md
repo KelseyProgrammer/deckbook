@@ -28,7 +28,7 @@ and released after trip completion plus a 48-hour dispute window. Success for th
 app (directory, accounts, booking, payments, credential verification), mobile feature parity, and an
 admin metrics dashboard whose Stripe-derived net revenue becomes the SOW v2 bonus metric.
 
-**Identity rule:** Crew Market is a marketplace — NOT an employer, crewing agency, or vessel
+**Identity rule:** DECKBOOK is a marketplace — NOT an employer, crewing agency, or vessel
 operator. This is the product's legal spine (contractor classification, docs/COMPLIANCE.md).
 
 ## Positioning
@@ -68,7 +68,7 @@ classification posture, insurance requirements, Jones Act, escrow characterizati
 
 ## Brand Commitments
 
-Name: **Crew Market**. The D-2 disclaimer is verbatim and mandatory at signup, every profile, the
+Name: **DECKBOOK**. The D-2 disclaimer is verbatim and mandatory at signup, every profile, the
 booking flow, and the persistent footer. Voice: calm, exact, maritime-professional; crew "offer
 services," boats "book" them (M-1 vocabulary is binding). Confirmed visual direction from the
 client engagement: regal, seafaring, structured utility; navy blue, crisp white, brass — realized

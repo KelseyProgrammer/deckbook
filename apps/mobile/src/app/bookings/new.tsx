@@ -291,7 +291,7 @@ export default function BookingRequestScreen() {
 
       <Text style={styles.hint}>
         This request forms a booking agreement between <Text style={styles.hintBold}>{boatName}</Text>{" "}
-        and <Text style={styles.hintBold}>{profile.displayName}</Text>. Crew Market keeps the
+        and <Text style={styles.hintBold}>{profile.displayName}</Text>. DECKBOOK keeps the
         ledger and holds the funds; it is not a party to the agreement. Cancellation and refund
         terms are stated in the agreement.
       </Text>
@@ -316,8 +316,8 @@ export default function BookingRequestScreen() {
         onPress={onSubmit}
       />
       <Text style={styles.hint}>
-        {firstName} can accept or decline freely — declining never costs crew anything on Crew
-        Market.
+        {firstName} can accept or decline freely — declining never costs crew anything on
+        DECKBOOK.
       </Text>
 
       {/* D-2 placement: booking flow (CLAUDE.md hard constraint 6). */}

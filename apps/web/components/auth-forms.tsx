@@ -84,7 +84,7 @@ export function SignUpForm({ initialRole }: { initialRole?: string }) {
       <label className="auth__disclaimer">
         <input type="checkbox" name="disclaimer" required disabled={pending} />
         <span>
-          I understand the following: Crew Market is a directory and booking marketplace.
+          I understand the following: DECKBOOK is a directory and booking marketplace.
           {" "}We are not an employer, crewing agency, or vessel operator.
           {" "}Vessel owners are solely responsible for crew selection, vessel operation, and
           legal compliance including insurance.

@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
    for everyone else (route stays unadvertised — no nav link anywhere).
    Scope by rule: view + verified toggle, nothing more (SOW 2.ii). */
 
-export const metadata = { title: "Credential review — Crew Market" };
+export const metadata = { title: "Credential review — DECKBOOK" };
 
 export default async function AdminCredentials() {
   const user = await sessionUser();

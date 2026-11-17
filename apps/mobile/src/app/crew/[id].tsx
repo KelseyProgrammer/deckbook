@@ -148,7 +148,7 @@ export default function CrewProfileScreen() {
   if (state === "loading") {
     return (
       <View style={styles.center}>
-        <Stack.Screen options={{ title: "Crew Market" }} />
+        <Stack.Screen options={{ title: "DECKBOOK" }} />
         <ActivityIndicator color={color.navyDeep} />
         <Text style={styles.centerText}>Loading crew profile…</Text>
       </View>
@@ -158,7 +158,7 @@ export default function CrewProfileScreen() {
   if (state === "error") {
     return (
       <View style={styles.center}>
-        <Stack.Screen options={{ title: "Crew Market" }} />
+        <Stack.Screen options={{ title: "DECKBOOK" }} />
         <Text style={styles.centerText}>Can&apos;t reach the crew board — check your connection.</Text>
         <Pressable style={styles.retry} onPress={retry}>
           <Text style={styles.retryText}>Retry</Text>
@@ -170,7 +170,7 @@ export default function CrewProfileScreen() {
   if (state === "not-found" || !profile) {
     return (
       <View style={styles.center}>
-        <Stack.Screen options={{ title: "Crew Market" }} />
+        <Stack.Screen options={{ title: "DECKBOOK" }} />
         <Anchor size={26} opacity={0.5} />
         <Text style={styles.centerText}>This profile isn&apos;t on the board.</Text>
         <Link href="/" asChild>

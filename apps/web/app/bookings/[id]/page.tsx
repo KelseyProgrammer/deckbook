@@ -24,7 +24,7 @@ import type { UserEvent } from "../../../lib/booking-events";
    held funds are a visible object with the computed release date (R2/R4);
    cancellations are information, never alarm (R3). Only the two parties load it. */
 
-export const metadata = { title: "Voyage ledger — Crew Market" };
+export const metadata = { title: "Voyage ledger — DECKBOOK" };
 
 const TRAIL: { key: string; label: string; states: BookingState[] }[] = [
   { key: "requested", label: "Requested", states: ["REQUESTED"] },
@@ -38,7 +38,7 @@ const TRAIL: { key: string; label: string; states: BookingState[] }[] = [
 const CANCEL_INFO: Partial<Record<BookingState, { title: string; body: string }>> = {
   CANCELLED_WEATHER: {
     title: "Cancelled — weather",
-    body: "Blown out. Weather cancellation is its own outcome on Crew Market; any refund follows the booking agreement between the parties.",
+    body: "Blown out. Weather cancellation is its own outcome on DECKBOOK; any refund follows the booking agreement between the parties.",
   },
   CANCELLED_BOAT: {
     title: "Cancelled by the boat",
@@ -46,7 +46,7 @@ const CANCEL_INFO: Partial<Record<BookingState, { title: string; body: string }>
   },
   CANCELLED_CREW: {
     title: "Declined / cancelled by the crew member",
-    body: "Crew accept or decline at their sole discretion — declining never costs crew anything on Crew Market.",
+    body: "Crew accept or decline at their sole discretion — declining never costs crew anything on DECKBOOK.",
   },
 };
 
@@ -121,7 +121,7 @@ export default async function VoyageLedger({
             </div>
           </div>
           <p className="ledger__keeper">
-            CREW MARKET KEEPS THIS LEDGER AND HOLDS THE FUNDS · IT IS NOT A PARTY TO THE AGREEMENT
+            DECKBOOK KEEPS THIS LEDGER AND HOLDS THE FUNDS · IT IS NOT A PARTY TO THE AGREEMENT
           </p>
 
           {/* Money block — the same numbers as the request screen (R4), fee itemized (P-3). */}
@@ -146,7 +146,7 @@ export default async function VoyageLedger({
                       ? "Was held"
                       : state === "PAID_OUT"
                         ? "Paid out to crew (fee retained)"
-                        : "Held by Crew Market"}
+                        : "Held by DECKBOOK"}
                 </dt>
                 <dd className="mono">{fmtUsd(totalCents)}</dd>
               </div>
@@ -343,7 +343,7 @@ function ActionSlot({
     return (
       <p className="ledger__waiting">
         Nothing to do here — the payout releases automatically when the 48-hour review window
-        closes. Either party can raise a dispute with Crew Market support before then.
+        closes. Either party can raise a dispute with DECKBOOK support before then.
       </p>
     );
   }

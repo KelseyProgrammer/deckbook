@@ -1,6 +1,6 @@
 # apps/mobile — Expo (React Native)
 
-Crew-side companion app for the Crew Market marketplace. The crew-side UX is
+Crew-side companion app for the DECKBOOK marketplace. The crew-side UX is
 mobile-first: availability toggles, listing alerts, and quick accept/decline
 on booking requests are the north star for later slices. This app shares
 `@crewmarket/types` (workspace package) with the web app so the two clients
