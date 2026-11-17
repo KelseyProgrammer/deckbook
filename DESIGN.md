@@ -341,7 +341,7 @@ what makes it read as a seal. No skews, blobs, or organic shapes.
 
 ### Masthead
 Navy bar with brass-engrave bottom hairline. The logo sits left: the compass-and-sportfisher mark
-(50×44px) beside the serif "Deckbook" wordmark (22px tall), both White Crisp — the logo never takes
+(68×60px) beside the serif "Deckbook" wordmark (30px tall), both White Crisp — the logo never takes
 brass. Vectors live in `assets/brand/` (traced from the client-supplied logo, 11/17/2026); every
 icon, splash and share raster is regenerated from them by `scripts/build-brand-assets.mjs`. Mono uppercase nav links
 (12px/0.14em) in Mist, Brass Bright on hover. Centre-aligned single row; authored two-row wrap

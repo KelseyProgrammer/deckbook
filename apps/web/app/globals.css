@@ -53,8 +53,8 @@ a { color: inherit; }
   -webkit-mask: var(--logo) center / contain no-repeat;
   mask: var(--logo) center / contain no-repeat;
 }
-.wordmark__mark { --logo: url("/brand/deckbook-mark.svg"); width: 50px; height: 44px; }
-.wordmark__type { --logo: url("/brand/deckbook-wordmark.svg"); width: 124px; height: 22px; }
+.wordmark__mark { --logo: url("/brand/deckbook-mark.svg"); width: 68px; height: 60px; }
+.wordmark__type { --logo: url("/brand/deckbook-wordmark.svg"); width: 169px; height: 30px; }
 .masthead__nav { display: flex; gap: var(--s-5); }
 .masthead__nav a {
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em;
