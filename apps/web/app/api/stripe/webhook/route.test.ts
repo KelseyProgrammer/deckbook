@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 /* Spec: webhook is the source of truth for ACCEPTED -> ESCROW_FUNDED. Guards:
    bad signature -> 400; amount mismatch -> 200 + no transition; replay -> no-op.
-   canTransition/transition run for real (pure @crewmarket/types). */
+   canTransition/transition run for real (pure @deckbook/types). */
 
 const seams = vi.hoisted(() => ({
   verifyStripeEvent: vi.fn(),
@@ -10,11 +10,11 @@ const seams = vi.hoisted(() => ({
   prisma: { booking: { findUnique: vi.fn(), updateMany: vi.fn() } },
 }));
 
-vi.mock("@crewmarket/payments", () => ({
+vi.mock("@deckbook/payments", () => ({
   verifyStripeEvent: seams.verifyStripeEvent,
   refundBookingPayment: seams.refundBookingPayment,
 }));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 
 import { POST } from "./route";
 

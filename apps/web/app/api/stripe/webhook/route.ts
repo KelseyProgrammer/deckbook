@@ -1,7 +1,7 @@
 import type Stripe from "stripe";
-import { prisma } from "@crewmarket/db";
-import { refundBookingPayment, verifyStripeEvent } from "@crewmarket/payments";
-import { transition, type BookingState } from "@crewmarket/types";
+import { prisma } from "@deckbook/db";
+import { refundBookingPayment, verifyStripeEvent } from "@deckbook/payments";
+import { transition, type BookingState } from "@deckbook/types";
 
 /* Source of truth for funds-held (spec): the booking leaves ACCEPTED only when
    this event arrives — never on the Checkout redirect. Replays and out-of-order

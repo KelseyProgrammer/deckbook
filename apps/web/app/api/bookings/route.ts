@@ -1,5 +1,5 @@
 import { headers } from "next/headers";
-import { prisma } from "@crewmarket/db";
+import { prisma } from "@deckbook/db";
 import { auth } from "../../../lib/auth";
 import { bookingsForUser, type PartyRole } from "../../../lib/bookings";
 import { toBookingSummary } from "../../../lib/booking-view";

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
-vi.mock("@crewmarket/db", () => ({ prisma: {} }));
+vi.mock("@deckbook/db", () => ({ prisma: {} }));
 vi.mock("./credential-overrides", () => ({
   credentialOverrideMap: vi.fn(async () => new Map([["p-1", [{ kind: "STCW_BASIC", verified: true }]]])),
 }));

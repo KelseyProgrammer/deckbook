@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { Container } from "@crewmarket/ui";
+import { Container } from "@deckbook/ui";
 import { auth } from "../../lib/auth";
 import { SignOutButton } from "../../components/sign-out-button";
 import { CredentialsSection } from "./credentials-section";

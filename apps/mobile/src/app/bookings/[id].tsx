@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { ActivityIndicator, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Stack, useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
-import { fmtUsd } from "@crewmarket/types";
+import { fmtUsd } from "@deckbook/types";
 import { authClient, useSession } from "../../../lib/auth-client";
 import { API_URL } from "../../../lib/api";
 import { authGuardState } from "../../../lib/auth-guard";

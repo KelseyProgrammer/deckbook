@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Container, DisclaimerD2, VerifiedSeal } from "@crewmarket/ui";
+import { Container, DisclaimerD2, VerifiedSeal } from "@deckbook/ui";
 import seed from "../../../data/seed-crew.json";
 import { credentialsForProfile } from "../../../lib/credential-overrides";
 

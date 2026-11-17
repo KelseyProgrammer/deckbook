@@ -1,5 +1,5 @@
 import "server-only";
-import type { CrewCardData } from "@crewmarket/ui";
+import type { CrewCardData } from "@deckbook/ui";
 import seed from "../data/seed-crew.json";
 import { credentialOverrideMap, type PublicCredential } from "./credential-overrides";
 

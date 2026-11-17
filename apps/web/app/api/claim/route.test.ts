@@ -9,7 +9,7 @@ const seams = vi.hoisted(() => ({
 }));
 
 vi.mock("../../../lib/auth", () => ({ auth: { api: { getSession: seams.getSession } } }));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 // A real seed profile id exists; use one from the JSON. Mock the seed import to a known set.
 vi.mock("../../../data/seed-crew.json", () => ({
   default: { profiles: [{ id: "p-known", displayName: "Test Crew", roles: ["MATE"] }] },

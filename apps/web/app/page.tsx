@@ -1,4 +1,4 @@
-import { Container } from "@crewmarket/ui";
+import { Container } from "@deckbook/ui";
 
 /* Landing — see docs/DESIGN.md.
    L1: institutional first glance (chart field, engraved serif).

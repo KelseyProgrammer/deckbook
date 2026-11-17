@@ -1,10 +1,10 @@
 {
-  "name": "@crewmarket/payments",
+  "name": "@deckbook/payments",
   "version": "0.0.1",
   "main": "src/index.ts",
   "scripts": { "test": "vitest run" },
   "dependencies": {
-    "@crewmarket/types": "workspace:*",
+    "@deckbook/types": "workspace:*",
     "stripe": "^22.6.2"
   },
   "devDependencies": {

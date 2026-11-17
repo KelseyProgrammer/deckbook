@@ -1,4 +1,4 @@
-import { AnchorMark, CompassRose, Container, CrewCard, type CrewCardData } from "@crewmarket/ui";
+import { AnchorMark, CompassRose, Container, CrewCard, type CrewCardData } from "@deckbook/ui";
 import seed from "../../data/seed-crew.json";
 import { boardData } from "../../lib/board-data";
 

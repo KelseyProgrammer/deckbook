@@ -4,7 +4,7 @@
 // (frozen vocabulary) so mobile and web read identically. If the web map
 // changes, mirror it here. State copy is about the DOCUMENT, never the
 // person's competence (V-1 visual distinction, V-3 wording).
-import { Credential } from "@crewmarket/types";
+import { Credential } from "@deckbook/types";
 
 export const CREDENTIAL_KINDS = Credential.shape.kind.options;
 

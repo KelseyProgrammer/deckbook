@@ -1,4 +1,4 @@
-import { Container } from "@crewmarket/ui";
+import { Container } from "@deckbook/ui";
 import { SignInForm } from "../../components/auth-forms";
 
 export const metadata = { title: "Sign in — Crew Market" };

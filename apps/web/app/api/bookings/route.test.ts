@@ -15,7 +15,7 @@ const seams = vi.hoisted(() => ({
 
 vi.mock("server-only", () => ({}));
 vi.mock("../../../lib/auth", () => ({ auth: { api: { getSession: seams.getSession } } }));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 vi.mock("../../../lib/bookings", () => ({
   bookingsForUser: seams.bookingsForUser,
   crewProfileById: seams.crewProfileById,

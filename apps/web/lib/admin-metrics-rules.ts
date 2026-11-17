@@ -1,7 +1,7 @@
 /* Pure aggregation for the admin metrics dashboard — no I/O, unit-tested.
    Aggregates only: nothing here ranks or lists individual crew (M-2/P-4). */
 
-import type { BookingState } from "@crewmarket/types";
+import type { BookingState } from "@deckbook/types";
 
 /** Funds-held lifecycle: fee is committed but not yet realized (P-2 window). */
 export const HELD_FEE_STATES: ReadonlySet<BookingState> = new Set([

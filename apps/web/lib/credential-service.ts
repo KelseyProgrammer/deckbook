@@ -1,5 +1,5 @@
 import { createId } from "@paralleldrive/cuid2";
-import { prisma } from "@crewmarket/db";
+import { prisma } from "@deckbook/db";
 import { claimedProfileId, sessionUser } from "./bookings";
 import { CREDENTIAL_KINDS, s3KeyFor, validateUpload } from "./credential-rules";
 import { deleteObject, headObject, presignedGet, presignedPut } from "./credential-storage";

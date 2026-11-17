@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { Container, DisclaimerD2, BookingStateBadge } from "@crewmarket/ui";
-import { prisma } from "@crewmarket/db";
-import { fmtUsd, payoutReleasable, TRIP_TYPE_LABELS, type BookingState } from "@crewmarket/types";
+import { Container, DisclaimerD2, BookingStateBadge } from "@deckbook/ui";
+import { prisma } from "@deckbook/db";
+import { fmtUsd, payoutReleasable, TRIP_TYPE_LABELS, type BookingState } from "@deckbook/types";
 import {
   bookingDates,
   crewProfileById,

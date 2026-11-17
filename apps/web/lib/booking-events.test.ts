@@ -13,10 +13,10 @@ const seams = vi.hoisted(() => ({
 }));
 
 vi.mock("server-only", () => ({}));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 vi.mock("./bookings", () => ({ partyRoleFor: seams.partyRoleFor }));
 // Keep isCancelState / refundCentsFor real (importOriginal); only stub the Stripe call.
-vi.mock("@crewmarket/payments", async (importOriginal) => ({
+vi.mock("@deckbook/payments", async (importOriginal) => ({
   ...(await importOriginal<object>()),
   refundBookingPayment: seams.refundBookingPayment,
 }));

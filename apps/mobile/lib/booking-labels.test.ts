@@ -45,7 +45,7 @@ describe("STATE_LABELS (mirrors packages/ui/src/components.tsx exactly)", () => 
   });
 });
 
-describe("holdFundsLabel (uses canonical fmtUsd from @crewmarket/types)", () => {
+describe("holdFundsLabel (uses canonical fmtUsd from @deckbook/types)", () => {
   it("whole-dollar total renders as fmtUsd does", () => {
     expect(holdFundsLabel(11200)).toBe("Hold funds — $112");
   });

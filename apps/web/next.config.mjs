@@ -16,7 +16,7 @@ const nextConfig = {
   outputFileTracingIncludes: {
     "/**": ["../../node_modules/.pnpm/@prisma+client*/node_modules/.prisma/client/*.node"],
   },
-  transpilePackages: ["@crewmarket/ui", "@crewmarket/types", "@crewmarket/payments", "@crewmarket/db"],
+  transpilePackages: ["@deckbook/ui", "@deckbook/types", "@deckbook/payments", "@deckbook/db"],
   async headers() { return [{ source: "/(.*)", headers: securityHeaders }]; },
 };
 export default nextConfig;

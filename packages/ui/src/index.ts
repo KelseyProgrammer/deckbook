@@ -1,5 +1,5 @@
-// @crewmarket/ui — shared components + tokens.
-// Import "@crewmarket/ui/src/tokens.css" once in the web root layout.
+// @deckbook/ui — shared components + tokens.
+// Import "@deckbook/ui/src/tokens.css" once in the web root layout.
 export { VerifiedSeal, DisclaimerD2, BookingStateBadge, CrewCard, Container } from "./components";
 export type { CrewCardData } from "./components";
 export { availabilityWindow, AvailabilityStrip } from "./availability";

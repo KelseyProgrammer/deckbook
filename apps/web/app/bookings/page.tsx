@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import { Container, BookingStateBadge } from "@crewmarket/ui";
-import { fmtUsd, type BookingState } from "@crewmarket/types";
+import { Container, BookingStateBadge } from "@deckbook/ui";
+import { fmtUsd, type BookingState } from "@deckbook/types";
 import {
   bookingDates,
   bookingsForUser,
@@ -10,7 +10,7 @@ import {
   sessionUser,
   voyageNo,
 } from "../../lib/bookings";
-import { prisma } from "@crewmarket/db";
+import { prisma } from "@deckbook/db";
 
 /* Bookings index (docs/BOOKING_BRIEF.md): registry rows, role-branched.
    No ranks, no urgency — a census of voyages, newest first. */

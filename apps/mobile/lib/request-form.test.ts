@@ -10,7 +10,7 @@ import {
 } from "./request-form";
 
 /* Pure request-form logic (slice 5). Money math itself comes straight from
-   @crewmarket/types (the same computeQuote the web form and the server use) —
+   @deckbook/types (the same computeQuote the web form and the server use) —
    these tests pin the FORM's behavior around it: day coercion, submit gating,
    and the exact payload shape POST /api/bookings expects. Preview-only (R4). */
 

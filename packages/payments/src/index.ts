@@ -1,5 +1,5 @@
 /**
- * @crewmarket/payments — Stripe Connect Express (rules P-1..P-4, G-1).
+ * @deckbook/payments — Stripe Connect Express (rules P-1..P-4, G-1).
  * Separate charges & transfers: boat pays into the platform balance at booking
  * (Checkout, fee itemized per P-3); refunds come from that balance; after
  * COMPLETED + 48h (P-2) a Transfer moves rateCents to the crew's Express

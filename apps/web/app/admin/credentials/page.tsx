@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { Container } from "@crewmarket/ui";
-import { prisma } from "@crewmarket/db";
+import { Container } from "@deckbook/ui";
+import { prisma } from "@deckbook/db";
 import { crewProfileById, sessionUser } from "../../../lib/bookings";
 import { isAdminEmail } from "../../../lib/credential-rules";
 import { setCredentialVerified, viewCredentialDocAsAdmin } from "./actions";

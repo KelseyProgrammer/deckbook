@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { prisma } from "@crewmarket/db";
+import { prisma } from "@deckbook/db";
 import { sessionUser } from "../../../lib/bookings";
 import { isAdminEmail } from "../../../lib/credential-rules";
 import { presignedGet } from "../../../lib/credential-storage";

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { redirect } from "next/navigation";
-import { Container, DisclaimerD2 } from "@crewmarket/ui";
-import { tripTypesFor } from "@crewmarket/types";
+import { Container, DisclaimerD2 } from "@deckbook/ui";
+import { tripTypesFor } from "@deckbook/types";
 import { crewProfileById, sessionUser } from "../../../lib/bookings";
 import { RequestForm } from "./request-form";
 

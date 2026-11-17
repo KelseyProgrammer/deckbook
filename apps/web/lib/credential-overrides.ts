@@ -1,5 +1,5 @@
 import "server-only";
-import { prisma } from "@crewmarket/db";
+import { prisma } from "@deckbook/db";
 
 /* Claimed profiles with uploaded docs render credentials from the DB instead of
    seed data, so the admin's verification is what the public actually sees.

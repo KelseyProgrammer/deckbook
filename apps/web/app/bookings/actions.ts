@@ -2,9 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { prisma } from "@crewmarket/db";
-import { createBookingCheckout } from "@crewmarket/payments";
-import { TRIP_TYPE_LABELS, type TripType } from "@crewmarket/types";
+import { prisma } from "@deckbook/db";
+import { createBookingCheckout } from "@deckbook/payments";
+import { TRIP_TYPE_LABELS, type TripType } from "@deckbook/types";
 import { partyRoleFor, sessionUser } from "../../lib/bookings";
 import { applyBookingEvent, type UserEvent } from "../../lib/booking-events";
 import { createBookingRequest } from "../../lib/booking-create";

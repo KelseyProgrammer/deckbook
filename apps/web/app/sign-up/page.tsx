@@ -1,4 +1,4 @@
-import { Container } from "@crewmarket/ui";
+import { Container } from "@deckbook/ui";
 import { SignUpForm } from "../../components/auth-forms";
 
 /* Accounts & Roles (SOW 2.i): CREW / BOAT account creation.

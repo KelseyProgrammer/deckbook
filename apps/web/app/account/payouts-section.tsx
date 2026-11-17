@@ -1,5 +1,5 @@
-import { prisma } from "@crewmarket/db";
-import { payoutReadiness } from "@crewmarket/payments";
+import { prisma } from "@deckbook/db";
+import { payoutReadiness } from "@deckbook/payments";
 import { claimedProfileId } from "../../lib/bookings";
 import { beginPayoutOnboarding } from "./payout-actions";
 

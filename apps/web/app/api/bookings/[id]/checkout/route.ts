@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
-import { prisma } from "@crewmarket/db";
-import { createBookingCheckout } from "@crewmarket/payments";
-import { TRIP_TYPE_LABELS, type TripType } from "@crewmarket/types";
+import { prisma } from "@deckbook/db";
+import { createBookingCheckout } from "@deckbook/payments";
+import { TRIP_TYPE_LABELS, type TripType } from "@deckbook/types";
 import { auth } from "../../../../../lib/auth";
 import { partyRoleFor } from "../../../../../lib/bookings";
 

@@ -1,5 +1,5 @@
 import "server-only";
-import { prisma, type Booking } from "@crewmarket/db";
+import { prisma, type Booking } from "@deckbook/db";
 import {
   computeQuote,
   datesFrom,
@@ -7,7 +7,7 @@ import {
   tripTypesFor,
   TRIP_TYPES,
   type TripType,
-} from "@crewmarket/types";
+} from "@deckbook/types";
 import { crewProfileById } from "./bookings";
 
 /* Booking creation core (slice 5) — the ONE home for the creation guards,

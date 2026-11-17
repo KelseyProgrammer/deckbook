@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Oswald, Archivo, Martian_Mono } from "next/font/google";
-import { DisclaimerD2, Container } from "@crewmarket/ui";
+import { DisclaimerD2, Container } from "@deckbook/ui";
 import "./globals.css";
 
 // Self-hosted at build via next/font (no FOUT). tokens.css resolves the --next-font-* vars.

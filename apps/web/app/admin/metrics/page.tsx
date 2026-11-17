@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { Container } from "@crewmarket/ui";
-import { fmtUsd, type BookingState } from "@crewmarket/types";
+import { Container } from "@deckbook/ui";
+import { fmtUsd, type BookingState } from "@deckbook/types";
 import { sessionUser } from "../../../lib/bookings";
 import { isAdminEmail } from "../../../lib/credential-rules";
 import { computeMetrics } from "../../../lib/admin-metrics";

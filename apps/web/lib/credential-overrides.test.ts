@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
-vi.mock("@crewmarket/db", () => ({ prisma: {} }));
+vi.mock("@deckbook/db", () => ({ prisma: {} }));
 
 const { toPublic } = await import("./credential-overrides");
 

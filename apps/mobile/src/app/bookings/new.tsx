@@ -16,7 +16,7 @@ import {
   PLATFORM_FEE_SIDE,
   TRIP_TYPE_LABELS,
   type TripType,
-} from "@crewmarket/types";
+} from "@deckbook/types";
 import { BrassButton } from "../../../components/brass-button";
 import { DateField } from "../../../components/date-field";
 import { DisclaimerD2 } from "../../../components/disclaimer-d2";

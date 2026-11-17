@@ -1,6 +1,6 @@
 import "server-only";
-import type { Booking } from "@crewmarket/db";
-import { fmtUsd, type BookingState } from "@crewmarket/types";
+import type { Booking } from "@deckbook/db";
+import { fmtUsd, type BookingState } from "@deckbook/types";
 import { crewProfileById, type PartyRole } from "./bookings";
 
 /* Party-safe booking projections (P-4). The BOAT party sees the crew profile's

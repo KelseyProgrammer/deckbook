@@ -3,7 +3,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { nextCookies } from "better-auth/next-js";
 import { expo } from "@better-auth/expo";
 import { APIError } from "better-auth/api";
-import { prisma } from "@crewmarket/db";
+import { prisma } from "@deckbook/db";
 import { isAdminEmail } from "./credential-rules";
 
 /* Accounts & Roles (SOW 2.i). Two account types only: CREW offers services, BOAT books

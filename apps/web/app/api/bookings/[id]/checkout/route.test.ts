@@ -14,9 +14,9 @@ const seams = vi.hoisted(() => ({
 }));
 
 vi.mock("../../../../../lib/auth", () => ({ auth: { api: { getSession: seams.getSession } } }));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 vi.mock("../../../../../lib/bookings", () => ({ partyRoleFor: seams.partyRoleFor }));
-vi.mock("@crewmarket/payments", () => ({ createBookingCheckout: seams.createBookingCheckout }));
+vi.mock("@deckbook/payments", () => ({ createBookingCheckout: seams.createBookingCheckout }));
 vi.mock("next/headers", () => ({ headers: vi.fn(async () => new Headers()) }));
 
 import { POST } from "./route";

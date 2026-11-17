@@ -4,7 +4,7 @@ import {
   type BookingQuote,
   type CrewRates,
   type TripType,
-} from "@crewmarket/types";
+} from "@deckbook/types";
 
 /* Pure logic for the native booking-request form (slice 5). The money math is
    the SAME computeQuote the web form and the server use — imported, not

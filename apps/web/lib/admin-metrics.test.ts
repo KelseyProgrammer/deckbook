@@ -10,8 +10,8 @@ const seams = vi.hoisted(() => ({
 }));
 
 vi.mock("server-only", () => ({}));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
-vi.mock("@crewmarket/payments", () => ({ stripeRevenue: seams.stripeRevenue }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/payments", () => ({ stripeRevenue: seams.stripeRevenue }));
 
 beforeEach(() => {
   vi.resetModules();

@@ -12,7 +12,7 @@ const seams = vi.hoisted(() => ({
 }));
 
 vi.mock("server-only", () => ({}));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 vi.mock("./bookings", () => ({ crewProfileById: seams.crewProfileById }));
 
 import { createBookingRequest } from "./booking-create";

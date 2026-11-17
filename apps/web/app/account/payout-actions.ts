@@ -1,8 +1,8 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { prisma } from "@crewmarket/db";
-import { createExpressAccount, createOnboardingLink } from "@crewmarket/payments";
+import { prisma } from "@deckbook/db";
+import { createExpressAccount, createOnboardingLink } from "@deckbook/payments";
 import { claimedProfileId, sessionUser } from "../../lib/bookings";
 
 /* Payout setup is opt-in from /account only — accepting work is never gated on

@@ -1,5 +1,5 @@
 {
-  "name": "@crewmarket/ui",
+  "name": "@deckbook/ui",
   "version": "0.0.1",
   "main": "src/index.ts",
   "exports": {

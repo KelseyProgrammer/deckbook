@@ -2,7 +2,7 @@
    V-2: keys derive from validated content type, never the client filename.
    V-1: admin allowlist is env-driven; empty list admits nobody. */
 
-import { Credential } from "@crewmarket/types";
+import { Credential } from "@deckbook/types";
 
 export const CREDENTIAL_KINDS = Credential.shape.kind.options;
 export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;

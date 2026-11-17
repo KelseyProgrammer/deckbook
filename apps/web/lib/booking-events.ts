@@ -1,7 +1,7 @@
 import "server-only";
-import { prisma } from "@crewmarket/db";
-import { isCancelState, refundBookingPayment, refundCentsFor } from "@crewmarket/payments";
-import { canTransition, transition, type BookingEvent, type BookingState } from "@crewmarket/types";
+import { prisma } from "@deckbook/db";
+import { isCancelState, refundBookingPayment, refundCentsFor } from "@deckbook/payments";
+import { canTransition, transition, type BookingEvent, type BookingState } from "@deckbook/types";
 import { partyRoleFor, type PartyRole } from "./bookings";
 
 export type UserEvent = Exclude<

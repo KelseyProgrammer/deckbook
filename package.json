@@ -1,5 +1,5 @@
 {
-  "name": "sportfishing-crew-market",
+  "name": "deckbook",
   "private": true,
   "scripts": {
     "dev": "turbo dev",

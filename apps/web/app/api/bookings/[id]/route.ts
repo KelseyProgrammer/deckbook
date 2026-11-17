@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
-import { prisma } from "@crewmarket/db";
-import type { BookingState } from "@crewmarket/types";
+import { prisma } from "@deckbook/db";
+import type { BookingState } from "@deckbook/types";
 import { auth } from "../../../../lib/auth";
 import { partyRoleFor, withElapsedWindow } from "../../../../lib/bookings";
 import { availableEventsFor } from "../../../../lib/booking-events";

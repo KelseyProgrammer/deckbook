@@ -10,7 +10,7 @@ import {
   TRIP_TYPE_LABELS,
   type CrewRates,
   type TripType,
-} from "@crewmarket/types";
+} from "@deckbook/types";
 import { createBookingAction, type RequestFormState } from "../actions";
 
 /* Client shell for instant quote preview only — the server action recomputes the

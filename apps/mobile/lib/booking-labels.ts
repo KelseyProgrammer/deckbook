@@ -8,7 +8,7 @@
 // STATE_LABELS mirrors the canonical map in packages/ui/src/components.tsx
 // EXACTLY (frozen vocabulary) so mobile and web read identically. If the
 // web map changes, mirror it here.
-import { fmtUsd } from "@crewmarket/types";
+import { fmtUsd } from "@deckbook/types";
 
 const EVENT_LABELS: Record<string, string> = {
   CREW_ACCEPT: "Accept booking",

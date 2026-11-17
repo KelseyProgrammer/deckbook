@@ -1,7 +1,7 @@
 import "server-only";
-import { prisma } from "@crewmarket/db";
-import type { BookingState } from "@crewmarket/types";
-import { stripeRevenue, type StripeRevenue } from "@crewmarket/payments";
+import { prisma } from "@deckbook/db";
+import type { BookingState } from "@deckbook/types";
+import { stripeRevenue, type StripeRevenue } from "@deckbook/payments";
 import { bookingStateCounts, splitFees, verifiedProfileCount } from "./admin-metrics-rules";
 import { createTtlCache } from "./ttl-cache";
 

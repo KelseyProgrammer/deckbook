@@ -1,6 +1,6 @@
 import "server-only";
 import { headers } from "next/headers";
-import { prisma, type Booking } from "@crewmarket/db";
+import { prisma, type Booking } from "@deckbook/db";
 import {
   DISPUTE_WINDOW_HOURS,
   payoutReleasable,
@@ -8,8 +8,8 @@ import {
   type BookingState,
   type CrewRates,
   type TripType,
-} from "@crewmarket/types";
-import { releaseCrewPayout } from "@crewmarket/payments";
+} from "@deckbook/types";
+import { releaseCrewPayout } from "@deckbook/payments";
 import { auth } from "./auth";
 import seed from "../data/seed-crew.json";
 

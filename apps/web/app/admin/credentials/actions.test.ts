@@ -12,7 +12,7 @@ const seams = vi.hoisted(() => ({
   }),
 }));
 
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 vi.mock("../../../lib/bookings", () => ({ sessionUser: seams.sessionUser }));
 vi.mock("../../../lib/credential-storage", () => ({ presignedGet: seams.presignedGet }));
 vi.mock("next/cache", () => ({ revalidatePath: vi.fn() }));
