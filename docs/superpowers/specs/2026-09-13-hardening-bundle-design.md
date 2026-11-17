@@ -34,7 +34,7 @@ HANDOFF: "unauthenticated + un-rate-limited (fine for demo scale, note before re
 Unit tests with mocked seams in the existing `apps/web` vitest setup. Files beside the actions:
 `app/account/credential-actions.test.ts`, `app/admin/credentials/actions.test.ts`.
 
-Mocks: `@crewmarket/db` (prisma.credentialDoc CRUD), `lib/bookings` (`sessionUser`,
+Mocks: `@deckbook/db` (prisma.credentialDoc CRUD), `lib/bookings` (`sessionUser`,
 `claimedProfileId`), `lib/credential-storage` (`headObject`, `presignedPut/Get`,
 `deleteObject`), `next/cache` (`revalidatePath` noop), `next/navigation` (`redirect` throws a
 sentinel to assert target). `ADMIN_EMAILS` via env stub.

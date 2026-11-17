@@ -55,8 +55,8 @@ No new booking states and no new events — the exhaustive `Record<BookingState,
 - [ ] **Step 1: Add workspace deps to packages/payments**
 
 ```bash
-pnpm --filter @crewmarket/payments add "@crewmarket/types@workspace:*" "stripe@^22"
-pnpm --filter @crewmarket/payments add -D vitest
+pnpm --filter @deckbook/payments add "@deckbook/types@workspace:*" "stripe@^22"
+pnpm --filter @deckbook/payments add -D vitest
 ```
 
 After install, sanity-check the v2 namespace exists:
@@ -166,7 +166,7 @@ describe("refund tiers (G-1: placeholder config, not policy)", () => {
 
 - [ ] **Step 3: Run to verify failure**
 
-Run: `pnpm --filter @crewmarket/payments test`
+Run: `pnpm --filter @deckbook/payments test`
 Expected: FAIL — module `./refund-tiers` not found.
 
 - [ ] **Step 4: Implement**
@@ -199,7 +199,7 @@ export function refundCentsFor(target: CancelState, totalCents: number): number 
 
 - [ ] **Step 5: Run to verify pass**
 
-Run: `pnpm --filter @crewmarket/payments test`
+Run: `pnpm --filter @deckbook/payments test`
 Expected: 4 passing.
 
 - [ ] **Step 6: Commit**
@@ -404,7 +404,7 @@ export function verifyStripeEvent(rawBody: string, signature: string): Stripe.Ev
 
 ```ts
 /**
- * @crewmarket/payments — Stripe Connect Express (rules P-1..P-4, G-1).
+ * @deckbook/payments — Stripe Connect Express (rules P-1..P-4, G-1).
  * Separate charges & transfers: boat pays into the platform balance at booking
  * (Checkout, fee itemized per P-3); refunds come from that balance; after
  * COMPLETED + 48h (P-2) a Transfer moves rateCents to the crew's Express
@@ -426,7 +426,7 @@ export type { CancelState } from "./refund-tiers";
 
 - [ ] **Step 6: Verify build + tests still green**
 
-Run: `pnpm build && pnpm --filter @crewmarket/payments test`
+Run: `pnpm build && pnpm --filter @deckbook/payments test`
 Expected: build passes, 4 tests pass.
 
 - [ ] **Step 7: Commit**
@@ -453,15 +453,15 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 /* Spec: webhook is the source of truth for ACCEPTED -> ESCROW_FUNDED. Guards:
    bad signature -> 400; amount mismatch -> 200 + no transition; replay -> no-op.
-   canTransition/transition run for real (pure @crewmarket/types). */
+   canTransition/transition run for real (pure @deckbook/types). */
 
 const seams = vi.hoisted(() => ({
   verifyStripeEvent: vi.fn(),
   prisma: { booking: { findUnique: vi.fn(), update: vi.fn() } },
 }));
 
-vi.mock("@crewmarket/payments", () => ({ verifyStripeEvent: seams.verifyStripeEvent }));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/payments", () => ({ verifyStripeEvent: seams.verifyStripeEvent }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 
 import { POST } from "./route";
 
@@ -564,9 +564,9 @@ Expected: FAIL — `./route` not found.
 
 ```ts
 import type Stripe from "stripe";
-import { prisma } from "@crewmarket/db";
-import { verifyStripeEvent } from "@crewmarket/payments";
-import { canTransition, transition, type BookingState } from "@crewmarket/types";
+import { prisma } from "@deckbook/db";
+import { verifyStripeEvent } from "@deckbook/payments";
+import { canTransition, transition, type BookingState } from "@deckbook/types";
 
 /* Source of truth for funds-held (spec): the booking leaves ACCEPTED only when
    this event arrives — never on the Checkout redirect. Replays and out-of-order
@@ -661,8 +661,8 @@ git commit -m "[ai-assisted] payments: webhook route — sig check, amount guard
 "use server";
 
 import { redirect } from "next/navigation";
-import { prisma } from "@crewmarket/db";
-import { createExpressAccount, createOnboardingLink } from "@crewmarket/payments";
+import { prisma } from "@deckbook/db";
+import { createExpressAccount, createOnboardingLink } from "@deckbook/payments";
 import { claimedProfileId, sessionUser } from "../../lib/bookings";
 
 /* Payout setup is opt-in from /account only — accepting work is never gated on
@@ -699,8 +699,8 @@ export async function beginPayoutOnboarding() {
 `apps/web/app/account/payouts-section.tsx`:
 
 ```tsx
-import { prisma } from "@crewmarket/db";
-import { payoutReadiness } from "@crewmarket/payments";
+import { prisma } from "@deckbook/db";
+import { payoutReadiness } from "@deckbook/payments";
 import { claimedProfileId } from "../../lib/bookings";
 import { beginPayoutOnboarding } from "./payout-actions";
 
@@ -777,7 +777,7 @@ git commit -m "[ai-assisted] payments: crew payout onboarding via hosted Express
 
 - [ ] **Step 1: Add the action**
 
-In `apps/web/app/bookings/actions.ts`, add imports (`createBookingCheckout` from `@crewmarket/payments`; `TRIP_TYPE_LABELS, type TripType` from `@crewmarket/types` if not already imported) and:
+In `apps/web/app/bookings/actions.ts`, add imports (`createBookingCheckout` from `@deckbook/payments`; `TRIP_TYPE_LABELS, type TripType` from `@deckbook/types` if not already imported) and:
 
 ```ts
 /** Boat's primary action at ACCEPTED: capture into the platform balance via
@@ -891,13 +891,13 @@ const seams = vi.hoisted(() => ({
   }),
 }));
 
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 vi.mock("../../lib/bookings", () => ({
   sessionUser: seams.sessionUser,
   partyRoleFor: seams.partyRoleFor,
   claimedProfileId: seams.claimedProfileId,
 }));
-vi.mock("@crewmarket/payments", async (importOriginal) => ({
+vi.mock("@deckbook/payments", async (importOriginal) => ({
   ...(await importOriginal<object>()),
   createBookingCheckout: vi.fn(),
   refundBookingPayment: seams.refundBookingPayment,
@@ -964,7 +964,7 @@ describe("bookingEventAction cancellation refunds", () => {
 });
 ```
 
-(If vitest reports the `../../lib/bookings` or `@crewmarket/payments` mock factory is missing an export that `actions.ts` imports, add that name as a `vi.fn()` to the factory — the factory must cover the module's full imported surface.)
+(If vitest reports the `../../lib/bookings` or `@deckbook/payments` mock factory is missing an export that `actions.ts` imports, add that name as a `vi.fn()` to the factory — the factory must cover the module's full imported surface.)
 
 - [ ] **Step 2: Run to verify failure**
 
@@ -987,7 +987,7 @@ if (isCancelState(next) && booking.stripePaymentIntentId && !booking.stripeRefun
 }
 ```
 
-Imports: `isCancelState, refundCentsFor, refundBookingPayment` from `@crewmarket/payments`.
+Imports: `isCancelState, refundCentsFor, refundBookingPayment` from `@deckbook/payments`.
 
 - [ ] **Step 4: Run to verify pass**
 
@@ -1030,8 +1030,8 @@ const seams = vi.hoisted(() => ({
 }));
 
 vi.mock("server-only", () => ({}));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
-vi.mock("@crewmarket/payments", () => ({ releaseCrewPayout: seams.releaseCrewPayout }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/payments", () => ({ releaseCrewPayout: seams.releaseCrewPayout }));
 vi.mock("./auth", () => ({ auth: { api: { getSession: vi.fn() } } }));
 vi.mock("next/headers", () => ({ headers: vi.fn() }));
 
@@ -1156,7 +1156,7 @@ export async function withElapsedWindow(booking: Booking): Promise<Booking> {
 }
 ```
 
-Import `releaseCrewPayout` from `@crewmarket/payments`.
+Import `releaseCrewPayout` from `@deckbook/payments`.
 
 - [ ] **Step 4: Run to verify pass**
 

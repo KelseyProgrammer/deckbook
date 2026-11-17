@@ -19,7 +19,7 @@ the rest stay as searchable history.
 
 <!-- New entries go here, newest first -->
 
-### 2026-08-28 — Crew Market re-evaluation after top-3 fix application (same session)
+### 2026-08-28 — DECKBOOK re-evaluation after top-3 fix application (same session)
 **Type:** html
 **Domain:** Two-sided marketplace MVP, pre-launch — delta audit vs. same-day baseline (76/100)
 **Key finding:** Three surgical fixes (one token split, one route, two lines of copy) moved the overall 76→81 without touching the visual world — confirming the baseline diagnosis that the failures were mechanical (contrast math, a missing route) rather than aesthetic. The intentional social-proof absence is now the stable ceiling: no further design work can raise L3 until real bookings generate real evidence.
@@ -27,7 +27,7 @@ the rest stay as searchable history.
 **Promote?:** no
 **Notes:** Delta audits are cheap when the baseline evidence pipeline (fetch + computed metrics) is scripted; only changed pairs needed re-measurement. Cross-ref the 2026-08-28 baseline entry.
 
-### 2026-08-28 — Crew Market web app (landing, directory, sign-up, sign-in, account) — Mode 1 corpus-backed audit
+### 2026-08-28 — DECKBOOK web app (landing, directory, sign-up, sign-in, account) — Mode 1 corpus-backed audit
 **Type:** html
 **Domain:** Two-sided marketplace MVP (sportfishing crew directory + booking), pre-launch, synthetic data
 **Key finding:** A signature accent chosen for meaning (brass = verification + primary action) failed AA contrast (3.55:1) in every small-text role it was given — the semantic discipline that made the palette strong concentrated all legibility risk into one token, invisible until measured. Secondary: compliance-driven honesty (no fabricated social proof, "self-reported" markers) reads as an L3 strength, not a gap, when mechanisms are shown instead.

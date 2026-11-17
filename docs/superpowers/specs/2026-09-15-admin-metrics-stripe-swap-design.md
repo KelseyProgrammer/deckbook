@@ -84,7 +84,7 @@ Revenue section branches on `m.revenue.source`:
 - **`simulated`:** the current two tiles (realized / held) with the existing simulated
   note — unchanged.
 
-All money via `fmtUsd` (`@crewmarket/types`). Existing tokens only; zero client JS;
+All money via `fmtUsd` (`@deckbook/types`). Existing tokens only; zero client JS;
 aggregates only (M-2/P-4). Bookings-by-state table, verification, accounts tiles
 unchanged.
 

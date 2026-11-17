@@ -20,7 +20,7 @@ enforced at signup by a required checkbox + the Better Auth `create.before` hook
 - Add dep `@better-auth/expo` (server side).
 - Add `expo()` to `plugins` (alongside `nextCookies()`). This enables bearer-token auth
   for native clients; the web cookie flow is unchanged.
-- Set `trustedOrigins: ["crewmarket://", "http://localhost:3000", "http://localhost:3002", "https://crewmarket-web.vercel.app"]`
+- Set `trustedOrigins: ["deckbook://", "http://localhost:3000", "http://localhost:3002", "https://crewmarket-web.vercel.app"]`
   (the app scheme from `app.json` + local dev + the deployed origin). Reads from an env
   or a literal list; keep it a literal list in code for now (documented).
 - No change to `additionalFields` or the D-2 `create.before` hook — mobile signup goes
@@ -57,7 +57,7 @@ claim button. `export const dynamic = "force-dynamic"`.
 ## 4. Mobile — auth client (`apps/mobile/lib/auth-client.ts`)
 
 - Deps: `better-auth`, `@better-auth/expo`, `expo-secure-store`.
-- `createAuthClient({ baseURL: API_URL, plugins: [expoClient({ scheme: "crewmarket", storagePrefix: "crewmarket", storage: SecureStore })] })`.
+- `createAuthClient({ baseURL: API_URL, plugins: [expoClient({ scheme: "deckbook", storagePrefix: "deckbook", storage: SecureStore })] })`.
 - Export `authClient` + a `useSession` hook (Better Auth's). Session token persists in
   secure storage across app restarts.
 
@@ -112,7 +112,7 @@ Copy is M-1 clean (no classification-banned terms); "drive this profile" matches
 
 ## 9. Env / deploy
 
-- `trustedOrigins` includes `crewmarket://`, localhost, and the Vercel origin, so auth works
+- `trustedOrigins` includes `deckbook://`, localhost, and the Vercel origin, so auth works
   against local or deployed API. Mobile `EXPO_PUBLIC_API_URL` selects which.
 - `@better-auth/expo` added to web (server plugin) and mobile (client). No new secrets.
 - Native fetch isn't subject to CORS; the Expo plugin + `trustedOrigins` cover auth origin

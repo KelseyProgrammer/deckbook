@@ -1,4 +1,4 @@
-# DESIGN.md — Crew Market visual system
+# DESIGN.md — DECKBOOK visual system
 
 **Brief:** regal, seafaring, structured utility. Coastal palette: navy blue, crisp white, brass.
 **Method:** Perception-First Design (PFD v0.7, Mode 2 derivation) constrained by the Intent system's

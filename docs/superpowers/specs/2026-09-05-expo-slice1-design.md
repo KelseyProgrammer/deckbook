@@ -30,7 +30,7 @@ five slices, this is slice 1)
 
 - Current stable Expo SDK, TypeScript, expo-router; replaces the README-only
   placeholder. Wired into the pnpm workspace (metro monorepo config), shares
-  `@crewmarket/types`.
+  `@deckbook/types`.
 - Design tokens: `apps/mobile/lib/tokens.ts` mirroring
   `packages/ui/src/tokens.css` values (navy #0A1D30, crisp white, brass,
   spacing/type scale) with a source-of-truth pointer comment. A shared tokens

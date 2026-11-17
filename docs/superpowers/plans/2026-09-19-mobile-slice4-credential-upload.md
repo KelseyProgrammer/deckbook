@@ -39,7 +39,7 @@
 
 ### Task 1: Extract `credential-service.ts` (web behavior unchanged)
 
-The existing guard tests are the safety net: they mock `../../lib/bookings`, `../../lib/credential-storage`, `@crewmarket/db`, and `next/navigation` — all of which the service will import through the same module ids, so the mocks keep applying. **They must pass unchanged; a failing test is a real guard gap, never a test to loosen.**
+The existing guard tests are the safety net: they mock `../../lib/bookings`, `../../lib/credential-storage`, `@deckbook/db`, and `next/navigation` — all of which the service will import through the same module ids, so the mocks keep applying. **They must pass unchanged; a failing test is a real guard gap, never a test to loosen.**
 
 **Files:**
 - Create: `apps/web/lib/credential-service.ts`
@@ -58,7 +58,7 @@ Logic moves **verbatim** from `credential-actions.ts` — do not "improve" any g
 
 ```ts
 import { createId } from "@paralleldrive/cuid2";
-import { prisma } from "@crewmarket/db";
+import { prisma } from "@deckbook/db";
 import { claimedProfileId, sessionUser } from "./bookings";
 import { CREDENTIAL_KINDS, s3KeyFor, validateUpload } from "./credential-rules";
 import { deleteObject, headObject, presignedGet, presignedPut } from "./credential-storage";
@@ -367,7 +367,7 @@ const seams = vi.hoisted(() => ({
 }));
 
 vi.mock("server-only", () => ({}));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 vi.mock("../../../lib/bookings", () => ({
   sessionUser: seams.sessionUser,
   claimedProfileId: seams.claimedProfileId,
@@ -514,7 +514,7 @@ const seams = vi.hoisted(() => ({
 }));
 
 vi.mock("server-only", () => ({}));
-vi.mock("@crewmarket/db", () => ({ prisma: {} }));
+vi.mock("@deckbook/db", () => ({ prisma: {} }));
 vi.mock("../../../../lib/bookings", () => ({
   sessionUser: seams.sessionUser,
   claimedProfileId: seams.claimedProfileId,
@@ -599,7 +599,7 @@ const seams = vi.hoisted(() => ({
 }));
 
 vi.mock("server-only", () => ({}));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 vi.mock("../../../../lib/bookings", () => ({
   sessionUser: seams.sessionUser,
   claimedProfileId: seams.claimedProfileId,
@@ -782,7 +782,7 @@ const seams = vi.hoisted(() => ({
 }));
 
 vi.mock("server-only", () => ({}));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 vi.mock("../../../../lib/bookings", () => ({
   sessionUser: seams.sessionUser,
   claimedProfileId: seams.claimedProfileId,
@@ -851,7 +851,7 @@ const seams = vi.hoisted(() => ({
 }));
 
 vi.mock("server-only", () => ({}));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 vi.mock("../../../../../lib/bookings", () => ({
   sessionUser: seams.sessionUser,
   claimedProfileId: seams.claimedProfileId,
@@ -985,8 +985,8 @@ In the `expo` object, add (or extend an existing `plugins` array):
   [
     "expo-image-picker",
     {
-      "cameraPermission": "Crew Market uses the camera to photograph your credential documents.",
-      "photosPermission": "Crew Market uses your photo library to upload credential documents."
+      "cameraPermission": "DECKBOOK uses the camera to photograph your credential documents.",
+      "photosPermission": "DECKBOOK uses your photo library to upload credential documents."
     }
   ]
 ]
@@ -1069,7 +1069,7 @@ Expected: FAIL — modules not found.
 // (frozen vocabulary) so mobile and web read identically. If the web map
 // changes, mirror it here. State copy is about the DOCUMENT, never the
 // person's competence (V-1 visual distinction, V-3 wording).
-import { Credential } from "@crewmarket/types";
+import { Credential } from "@deckbook/types";
 
 export const CREDENTIAL_KINDS = Credential.shape.kind.options;
 

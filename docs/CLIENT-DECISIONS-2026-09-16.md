@@ -1,4 +1,4 @@
-# Two decisions we need from you — Crew Market
+# Two decisions we need from you — DECKBOOK
 
 *Draft note for the client · 2026-09-16*
 

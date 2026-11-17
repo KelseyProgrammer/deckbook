@@ -1,10 +1,22 @@
-# HANDOFF.md — Crew Market project brief (context for any new Claude chat)
+# HANDOFF.md — DECKBOOK project brief (context for any new Claude chat)
 
 **Upload this file (or the repo zip) at the start of a new conversation to restore full context.**
 
+> **Rename note (11/16/2026):** this product was formerly **Crew Market**; the client (DECKBOOK LLC)
+> renamed it **DECKBOOK** in 11/2026. Commit history and the SOW v1 / SOW v2 document titles use the
+> old name. All in-repo names were rewritten on branch `rename/deckbook` (scope `@deckbook/*`, app ids
+> `com.deckbook.app`, scheme `deckbook://`, local DB `deckbook_dev`), and the repo moved off iCloud
+> Desktop to `~/Developer/deckbook`. **Still carrying the old name until the external cutover is
+> done:** Vercel projects/hosts `crewmarket-web` and `crewmarket-demo`, GitHub
+> `KelseyProgrammer/crewmarket`, EAS project `@krixament/crew-market` (retired — `app.json` has no
+> `projectId`; run `eas init` for a new `deckbook` project), and the transitional `crewmarket://`
+> entry in `apps/web/lib/auth.ts` `trustedOrigins`. The pre-rename test APK (`com.crewmarket.app`)
+> is retired once a `com.deckbook.app` build ships. SOW v2 (signed 11/9/2026) is the current scope;
+> the working plan is tracked in `docs/SOW-V2-AUDIT.md`.
+
 ## Who / what
 - Builder: solo dev (Mac, bash shell, Node 22.11, pnpm 9.12 installed directly — corepack is broken on this machine and must be avoided; use `npm install -g pnpm` if reinstalling).
-- Client: a good friend of the builder. Product: **Crew Market** — freelance contractor directory + marketplace for sportfishing boat crew. Enterprise folder: `sportfishing/`, project: `crew-market/`.
+- Client: a good friend of the builder. Product: **DECKBOOK** — freelance contractor directory + marketplace for sportfishing boat crew. Enterprise folder: `sportfishing/`, project: `deckbook/`.
 - Prior sibling project (same conventions, separate repo): `fertility/the-app`, a donor/parent matching marketplace at github.com/KelseyProgrammer/fertility-the-app. Runs locally at ~/Projects/the-app.
 
 ## Decisions made
@@ -22,7 +34,7 @@
 - **Booking state machine implemented:** `packages/types/src/booking-machine.ts` — typed transitions, CANCELLED_WEATHER first-class, 48h `DISPUTE_WINDOW` → `PAID_OUT`.
 - **classification-lint implemented** (was stub — exceeds SOW): `pnpm compliance:check` scans copy for M-1 employment-implying language, understands the negated D-2 disclaimer, `cl-allow` escape marker. Currently green.
 - **Pushed to GitHub** (8/28/2026): https://github.com/KelseyProgrammer/crewmarket — origin over HTTPS via `gh` (SSH key is passphrase-locked; `gh auth setup-git` configured as credential helper).
-- **Phase 1 Accounts & Roles built** (8/28/2026): Better Auth 1.7 (email/password) + `packages/db` (Prisma 6 / Postgres, Better Auth core tables + `accountType` CREW|BOAT + `disclaimerAccepted(At)` for D-2). Sign-up (role fork, required verbatim D-2 checkbox, server-side hook rejects without it and stamps time), sign-in, middleware cookie gate, `/account` role-branched shell with honest "next on the build" copy. Local DB: colima + docker compose (`docker-compose.yml`, postgres:17-alpine, db `crewmarket_dev`, user/pass `crewmarket`). Docker Desktop is NOT installed — use `colima start` first. `.env.local` (root + apps/web, gitignored) carries DATABASE_URL/BETTER_AUTH_SECRET; `packages/db/.env` symlinks root `.env.local` for the Prisma CLI.
+- **Phase 1 Accounts & Roles built** (8/28/2026): Better Auth 1.7 (email/password) + `packages/db` (Prisma 6 / Postgres, Better Auth core tables + `accountType` CREW|BOAT + `disclaimerAccepted(At)` for D-2). Sign-up (role fork, required verbatim D-2 checkbox, server-side hook rejects without it and stamps time), sign-in, middleware cookie gate, `/account` role-branched shell with honest "next on the build" copy. Local DB: colima + docker compose (`docker-compose.yml`, postgres:17-alpine, db `deckbook_dev`, user/pass `deckbook`). Docker Desktop is NOT installed — use `colima start` first. `.env.local` (root + apps/web, gitignored) carries DATABASE_URL/BETTER_AUTH_SECRET; `packages/db/.env` symlinks root `.env.local` for the Prisma CLI.
 - **Booking flow designed & confirmed (8/28/2026):** PFD-derived "Voyage Ledger" concept — one shared booking document, both roles, all states. Confirmed brief at `docs/BOOKING_BRIEF.md` (scope: direct bookings only; simulated funds-held step until client's Stripe keys arrive; full breadth). **Build starts 8/29/2026.** Critical copy law from the signed SOW: user-facing text says "funds held"/"delayed payout", NEVER "escrow" (escrow characterization is attorney territory, SOW 2.ii/6.i). Also this session: PFD audit 76→81 (brass-text AA token split, crew profile pages w/ D-2, pre-launch hero note); impeccable design hook enabled project-wide.
 - **Weigh-in board world SHIPPED (9/1/2026):** client locked Probe C and the full plan
   (`docs/superpowers/plans/2026-09-01-directory-weigh-in-board.md`) executed same day. Directory is
@@ -121,7 +133,7 @@
 - **Mobile slice 2 BUILT (9/15/2026) — native auth + claim-a-profile** per spec
   `docs/superpowers/specs/2026-09-15-mobile-slice2-auth-claim-design.md` + plan
   `docs/superpowers/plans/2026-09-15-mobile-slice2-auth-claim.md`. Server: Better Auth **Expo
-  plugin** + `trustedOrigins` (crewmarket://, localhost, Vercel) in `apps/web/lib/auth.ts`
+  plugin** + `trustedOrigins` (deckbook://, localhost, Vercel) in `apps/web/lib/auth.ts`
   (cookie web flow unchanged); better-auth aligned to ^1.7.5. Two new auth-gated routes —
   **`POST /api/claim`** (the FIRST real claim path in app code; CREW-only, 1:1 uniqueness via
   `profileId @id`/`userId @unique` + P2002→409, and the **V-2 guard** refusing a profile that
@@ -145,7 +157,7 @@
   plugin only auto-trusts `exp://` when NODE_ENV==="development", so on Vercel (production) sign-up
   POSTs were rejected "Invalid origin". Fixed by adding `"exp://"` to `trustedOrigins` in
   `auth.ts` (0e9a798) — marked DEV/DEMO-ONLY, remove before a real launch (standalone builds use
-  `crewmarket://`). (2) **auth-client base-path join** — `authClient.$fetch("/api/me")` prepends
+  `deckbook://`). (2) **auth-client base-path join** — `authClient.$fetch("/api/me")` prepends
   the client's `/api/auth` base → `/api/auth/api/me` → 404; fixed by calling custom routes with
   absolute URLs `${API_URL}/api/me` and `${API_URL}/api/claim` (still runs the Expo cookie +
   expo-origin onRequest hook) (eac6812). Diagnosed the 404 vs 401 from on-device `console.error`
@@ -438,17 +450,17 @@
   Android APK via EAS — project `@krixament/crew-market` (id beeead29, user's personal
   Expo account, client call), `eas.json` preview profile (internal distribution, APK,
   `EXPO_PUBLIC_API_URL` baked to crewmarket-web.vercel.app), cloud-generated keystore,
-  bundle ids `com.crewmarket.app` (iOS id reserved — iOS build deliberately skipped, no
-  Apple Developer account, client call 10/8), display name "Crew Market". Build
+  bundle ids `com.deckbook.app` (iOS id reserved — iOS build deliberately skipped, no
+  Apple Developer account, client call 10/8), display name "DECKBOOK". Build
   `8791e4c5` FINISHED; APK + install QR on the expo.dev build page. Config commit
-  bf2ffd8, gates green. `crewmarket://` was already in production trustedOrigins
+  bf2ffd8, gates green. `deckbook://` was already in production trustedOrigins
   (auth.ts) — the `exp://` entry remains DEV/DEMO-ONLY, remove before real launch.
   (3) **OUTSTANDING (~2 min, needs any Android phone — no Android hardware here; user
   declined the emulator install on this 8GB Intel Mac, sensible):** install the APK from
   the build-page QR and check the two never-exercised-on-Android watch items: date-picker
   Cancel must not write "today" (guard is unit-tested) and Stripe browser-return keeps
   the session (6188fcd, passed on iPhone). Also smoke standalone sign-in (first real
-  exercise of the `crewmarket://` origin). Natural fit: the client's first APK install.
+  exercise of the `deckbook://` origin). Natural fit: the client's first APK install.
 
 - **WEB DEMO OUTAGE FOUND + FIXED (10/8/2026, same evening):** the user's R2 upload
   eyeball failed — crewmarket-demo.vercel.app couldn't load the board or sign in from

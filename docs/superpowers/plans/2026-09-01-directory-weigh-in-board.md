@@ -176,7 +176,7 @@ export function CrewCard(props: {
     });
   });
   ```
-- [ ] Run and watch the new file fail: `pnpm --filter @crewmarket/ui test`
+- [ ] Run and watch the new file fail: `pnpm --filter @deckbook/ui test`
 - [ ] Rewrite `CrewCard` in `components.tsx`: signature above; markup shape (classnames
   resolved by globals.css in Task 1.4):
   ```tsx
@@ -199,7 +199,7 @@ export function CrewCard(props: {
   `windowStart` (directory computes `const windowStart = all.flatMap(c => c.availability.map(a => a.date)).sort()[0]`
   — deterministic from seed, honest under M-2: profiles whose window starts later render
   leading days closed).
-- [ ] Run to green: `pnpm --filter @crewmarket/ui test` (12 tests) and `pnpm --filter web build`.
+- [ ] Run to green: `pnpm --filter @deckbook/ui test` (12 tests) and `pnpm --filter web build`.
 - [ ] Commit: `[ai-assisted] directory C: CrewCard → board row, rank ordinal deleted, strip wired (M-2, V-1, V-4, P-4)`
 
 ## Task 1.4 — Directory surface: banner, filters, boardhead, row styling
@@ -234,7 +234,7 @@ export function CrewCard(props: {
   information, consistent with the strip's role-img aria label. Responsive + reduced-motion
   blocks per probe. Delete the `.plate*` rules once nothing references them.
 - [ ] Verify no ordinal anywhere on the page (view source: no `REG`, no numbering).
-- [ ] `pnpm --filter web build` && `pnpm compliance:check` && `pnpm --filter @crewmarket/ui test` green.
+- [ ] `pnpm --filter web build` && `pnpm compliance:check` && `pnpm --filter @deckbook/ui test` green.
 - [ ] Commit: `[ai-assisted] directory C: weigh-in board surface — banner, boardhead, row world (M-1, M-2, D-2 intact)`
 
 ## Task 1.5 — Cascade: landing, crew profile, sign-up/sign-in, account
@@ -276,7 +276,7 @@ what inheritance gets wrong (serif-era styling assumptions), it does not redesig
 
 ---
 
-**Phase 1 exit criteria:** `pnpm --filter @crewmarket/ui test` green (12 tests),
+**Phase 1 exit criteria:** `pnpm --filter @deckbook/ui test` green (12 tests),
 `pnpm compliance:check` green, `pnpm --filter web build` green, zero rank ordinals in any
 rendered surface, D-2 verbatim everywhere it was, brass carries only verification +
 primary action (+ the strip's bookable-state fill, recorded in DESIGN.md), all four SOW

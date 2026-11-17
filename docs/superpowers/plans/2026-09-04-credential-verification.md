@@ -26,11 +26,11 @@ Append to `services:` (keep the existing postgres block):
 ```yaml
   minio:
     image: minio/minio
-    container_name: crewmarket-minio
+    container_name: deckbook-minio
     command: server /data --console-address ":9001"
     environment:
-      MINIO_ROOT_USER: crewmarket
-      MINIO_ROOT_PASSWORD: crewmarket-dev # local dev only; real AWS creds come from the client (env swap)
+      MINIO_ROOT_USER: deckbook
+      MINIO_ROOT_PASSWORD: deckbook-dev # local dev only; real AWS creds come from the client (env swap)
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -52,8 +52,8 @@ And add `miniodata:` under `volumes:`. Also update the header comment: credentia
 # docker-compose; production = client's AWS bucket (endpoint empty for real AWS).
 S3_ENDPOINT="http://localhost:9000"
 S3_BUCKET="credential-docs"
-S3_ACCESS_KEY="crewmarket"
-S3_SECRET_KEY="crewmarket-dev"
+S3_ACCESS_KEY="deckbook"
+S3_SECRET_KEY="deckbook-dev"
 S3_FORCE_PATH_STYLE="true"
 # Admin allowlist (V-1: verified flag is admin-set only). Comma-separated emails.
 ADMIN_EMAILS="admin@example.com"
@@ -73,7 +73,7 @@ Add to `apps/web/package.json` scripts: `"test": "vitest run"`.
 - [ ] **Step 4: Start MinIO and verify**
 
 ```bash
-docker compose up -d minio && sleep 5 && docker ps --filter name=crewmarket-minio --format '{{.Status}}'
+docker compose up -d minio && sleep 5 && docker ps --filter name=deckbook-minio --format '{{.Status}}'
 ```
 Expected: `Up … (healthy)` (or `health: starting` — re-check after a few seconds).
 
@@ -187,9 +187,9 @@ describe("s3KeyFor", () => {
 
 describe("isAdminEmail", () => {
   it("matches against the comma-separated allowlist, case-insensitive, trimmed", () => {
-    const list = "ops@crewmarket.test, Admin@Example.com";
+    const list = "ops@deckbook.test, Admin@Example.com";
     expect(isAdminEmail("admin@example.com", list)).toBe(true);
-    expect(isAdminEmail("ops@crewmarket.test", list)).toBe(true);
+    expect(isAdminEmail("ops@deckbook.test", list)).toBe(true);
     expect(isAdminEmail("mate@example.com", list)).toBe(false);
   });
   it("empty or missing allowlist admits nobody", () => {
@@ -218,7 +218,7 @@ describe("CREDENTIAL_KINDS", () => {
    V-2: keys derive from validated content type, never the client filename.
    V-1: admin allowlist is env-driven; empty list admits nobody. */
 
-import { Credential } from "@crewmarket/types";
+import { Credential } from "@deckbook/types";
 
 export const CREDENTIAL_KINDS = Credential.shape.kind.options;
 export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
@@ -379,7 +379,7 @@ git commit -m "[ai-assisted] presigned storage helper — private bucket, 60s UR
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createId } from "@paralleldrive/cuid2";
-import { prisma } from "@crewmarket/db";
+import { prisma } from "@deckbook/db";
 import { claimedProfileId, sessionUser } from "../../lib/bookings";
 import { CREDENTIAL_KINDS, s3KeyFor, validateUpload } from "../../lib/credential-rules";
 import { deleteObject, headObject, presignedPut } from "../../lib/credential-storage";
@@ -574,7 +574,7 @@ export function CredentialUploadForm({ kinds }: { kinds: readonly string[] }) {
 - [ ] **Step 3: Credentials section (server component)** (`credentials-section.tsx`)
 
 ```tsx
-import { prisma } from "@crewmarket/db";
+import { prisma } from "@deckbook/db";
 import { claimedProfileId } from "../../lib/bookings";
 import { CREDENTIAL_KINDS } from "../../lib/credential-rules";
 import { CredentialUploadForm } from "./credential-upload-form";
@@ -673,7 +673,7 @@ git commit -m "[ai-assisted] crew credential upload — begin/PUT/confirm presig
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { prisma } from "@crewmarket/db";
+import { prisma } from "@deckbook/db";
 import { sessionUser } from "../../../lib/bookings";
 import { isAdminEmail } from "../../../lib/credential-rules";
 import { presignedGet } from "../../../lib/credential-storage";
@@ -714,8 +714,8 @@ export async function viewCredentialDocAsAdmin(formData: FormData): Promise<void
 
 ```tsx
 import { notFound } from "next/navigation";
-import { Container } from "@crewmarket/ui";
-import { prisma } from "@crewmarket/db";
+import { Container } from "@deckbook/ui";
+import { prisma } from "@deckbook/db";
 import { crewProfileById, sessionUser } from "../../../lib/bookings";
 import { isAdminEmail } from "../../../lib/credential-rules";
 import { setCredentialVerified, viewCredentialDocAsAdmin } from "./actions";
@@ -724,7 +724,7 @@ import { setCredentialVerified, viewCredentialDocAsAdmin } from "./actions";
    for everyone else (route stays unadvertised — no nav link anywhere).
    Scope by rule: view + verified toggle, nothing more (SOW 2.ii). */
 
-export const metadata = { title: "Credential review — Crew Market" };
+export const metadata = { title: "Credential review — DECKBOOK" };
 
 export default async function AdminCredentials() {
   const user = await sessionUser();
@@ -812,7 +812,7 @@ git commit -m "[ai-assisted] admin credential review — env-allowlist gate, ver
 
 ```ts
 import "server-only";
-import { prisma } from "@crewmarket/db";
+import { prisma } from "@deckbook/db";
 
 /* Claimed profiles with uploaded docs render credentials from the DB instead of
    seed data, so the admin's verification is what the public actually sees.

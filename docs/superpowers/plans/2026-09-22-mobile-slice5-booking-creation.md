@@ -4,7 +4,7 @@
 
 **Goal:** Native boat-side booking creation on mobile — a request form screen that fully replaces the web hand-off — backed by a shared server creation core and a new `POST /api/bookings` route.
 
-**Architecture:** Extract the creation logic out of the web server action into `apps/web/lib/booking-create.ts` (one home for the BOAT-only / trip-type-offered / R4 recompute / D-4 attestation guards, slice-4 `credential-service.ts` pattern); the web action and a new `POST /api/bookings` JSON route become thin wrappers. The mobile screen reads crew data from the existing board cache and imports the money math directly from `@crewmarket/types` (preview-only — the server recomputes).
+**Architecture:** Extract the creation logic out of the web server action into `apps/web/lib/booking-create.ts` (one home for the BOAT-only / trip-type-offered / R4 recompute / D-4 attestation guards, slice-4 `credential-service.ts` pattern); the web action and a new `POST /api/bookings` JSON route become thin wrappers. The mobile screen reads crew data from the existing board cache and imports the money math directly from `@deckbook/types` (preview-only — the server recomputes).
 
 **Tech Stack:** Next.js 15 App Router + Prisma (web), Expo / expo-router + better-auth Expo client (mobile), vitest both sides. One new mobile dependency: `@react-native-community/datetimepicker`.
 
@@ -68,7 +68,7 @@ const seams = vi.hoisted(() => ({
 }));
 
 vi.mock("server-only", () => ({}));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 vi.mock("./bookings", () => ({ crewProfileById: seams.crewProfileById }));
 
 import { createBookingRequest } from "./booking-create";
@@ -202,7 +202,7 @@ Expected: FAIL — `Cannot find module './booking-create'` (or equivalent resolv
 
 ```ts
 import "server-only";
-import { prisma, type Booking } from "@crewmarket/db";
+import { prisma, type Booking } from "@deckbook/db";
 import {
   computeQuote,
   datesFrom,
@@ -210,7 +210,7 @@ import {
   tripTypesFor,
   TRIP_TYPES,
   type TripType,
-} from "@crewmarket/types";
+} from "@deckbook/types";
 import { crewProfileById } from "./bookings";
 
 /* Booking creation core (slice 5) — the ONE home for the creation guards,
@@ -530,7 +530,7 @@ import {
 } from "./request-form";
 
 /* Pure request-form logic (slice 5). Money math itself comes straight from
-   @crewmarket/types (the same computeQuote the web form and the server use) —
+   @deckbook/types (the same computeQuote the web form and the server use) —
    these tests pin the FORM's behavior around it: day coercion, submit gating,
    and the exact payload shape POST /api/bookings expects. Preview-only (R4). */
 
@@ -640,7 +640,7 @@ import {
   type BookingQuote,
   type CrewRates,
   type TripType,
-} from "@crewmarket/types";
+} from "@deckbook/types";
 
 /* Pure logic for the native booking-request form (slice 5). The money math is
    the SAME computeQuote the web form and the server use — imported, not
@@ -753,7 +753,7 @@ import {
   PLATFORM_FEE_SIDE,
   TRIP_TYPE_LABELS,
   type TripType,
-} from "@crewmarket/types";
+} from "@deckbook/types";
 import { DisclaimerD2 } from "../../../components/disclaimer-d2";
 import { API_URL } from "../../../lib/api";
 import { authClient, useSession } from "../../../lib/auth-client";
@@ -1055,7 +1055,7 @@ export default function BookingRequestScreen() {
 
       <Text style={styles.hint}>
         This request forms a booking agreement between <Text style={styles.hintBold}>{boatName}</Text>{" "}
-        and <Text style={styles.hintBold}>{profile.displayName}</Text>. Crew Market keeps the
+        and <Text style={styles.hintBold}>{profile.displayName}</Text>. DECKBOOK keeps the
         ledger and holds the funds; it is not a party to the agreement. Cancellation and refund
         terms are stated in the agreement.
       </Text>
@@ -1082,8 +1082,8 @@ export default function BookingRequestScreen() {
         </Text>
       </Pressable>
       <Text style={styles.hint}>
-        {firstName} can accept or decline freely — declining never costs crew anything on Crew
-        Market.
+        {firstName} can accept or decline freely — declining never costs crew anything on
+        DECKBOOK.
       </Text>
 
       {/* D-2 placement: booking flow (CLAUDE.md hard constraint 6). */}

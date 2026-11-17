@@ -333,7 +333,7 @@ const seams = vi.hoisted(() => {
   };
 });
 
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 vi.mock("../../lib/bookings", () => ({
   sessionUser: seams.sessionUser,
   claimedProfileId: seams.claimedProfileId,
@@ -530,7 +530,7 @@ const seams = vi.hoisted(() => ({
   }),
 }));
 
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 vi.mock("../../../lib/bookings", () => ({ sessionUser: seams.sessionUser }));
 vi.mock("../../../lib/credential-storage", () => ({ presignedGet: seams.presignedGet }));
 vi.mock("next/cache", () => ({ revalidatePath: vi.fn() }));
@@ -538,7 +538,7 @@ vi.mock("next/navigation", () => ({ redirect: seams.redirect }));
 
 import { setCredentialVerified, viewCredentialDocAsAdmin } from "./actions";
 
-const ADMIN = { id: "a1", email: "admin@crewmarket.test", accountType: "BOAT" };
+const ADMIN = { id: "a1", email: "admin@deckbook.test", accountType: "BOAT" };
 const CREW = { id: "u1", email: "crew@example.test", accountType: "CREW" };
 const DOC = { id: "doc123", profileId: "p1", s3Key: "credentials/p1/doc123.pdf" };
 
@@ -550,7 +550,7 @@ function form(entries: Record<string, string>) {
 
 beforeEach(() => {
   vi.clearAllMocks();
-  vi.stubEnv("ADMIN_EMAILS", "admin@crewmarket.test");
+  vi.stubEnv("ADMIN_EMAILS", "admin@deckbook.test");
 });
 afterEach(() => vi.unstubAllEnvs());
 

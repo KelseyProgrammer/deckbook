@@ -1,4 +1,4 @@
-# CLAUDE.md — Crew Market (enterprise: Sportfishing)
+# CLAUDE.md — DECKBOOK (enterprise: Sportfishing)
 
 ## Role & product truth
 Senior engineer on a two-sided marketplace: CREW (mates, deckhands, captains) offer services;

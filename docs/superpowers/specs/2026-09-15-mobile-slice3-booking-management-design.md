@@ -12,8 +12,8 @@ Slices 1–2 shipped: the Expo board + registry-plate profile screens, native au
 booking lifecycle logic today runs through Next.js **server actions** (`"use server"`,
 form-bound, cookie session, `redirect`/`revalidatePath`) in
 `apps/web/app/bookings/actions.ts` — **not callable from a native app**. There is no
-booking JSON API. The state machine (`@crewmarket/types`) and payments
-(`@crewmarket/payments`) are shared packages, reusable server-side as-is.
+booking JSON API. The state machine (`@deckbook/types`) and payments
+(`@deckbook/payments`) are shared packages, reusable server-side as-is.
 `apps/web/lib/bookings.ts` has `sessionUser`, `partyRoleFor`, `claimedProfileId`,
 `bookingsForUser`, and `withElapsedWindow` (lazy payout-on-read — must run on every
 booking read; there is no cron).

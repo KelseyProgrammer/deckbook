@@ -50,7 +50,7 @@ Add import `import { expo } from "@better-auth/expo";`, change `plugins: [nextCo
 
 ```ts
   trustedOrigins: [
-    "crewmarket://",
+    "deckbook://",
     "http://localhost:3000",
     "http://localhost:3002",
     "https://crewmarket-web.vercel.app",
@@ -96,7 +96,7 @@ const seams = vi.hoisted(() => ({
 }));
 
 vi.mock("../../../lib/auth", () => ({ auth: { api: { getSession: seams.getSession } } }));
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
 // A real seed profile id exists; use one from the JSON. Mock the seed import to a known set.
 vi.mock("../../../data/seed-crew.json", () => ({
   default: { profiles: [{ id: "p-known", displayName: "Test Crew", roles: ["MATE"] }] },
@@ -172,7 +172,7 @@ Expected: FAIL — `./route` not found.
 
 ```ts
 import { headers } from "next/headers";
-import { prisma } from "@crewmarket/db";
+import { prisma } from "@deckbook/db";
 import { auth } from "../../../lib/auth";
 import seed from "../../../data/seed-crew.json";
 
@@ -353,7 +353,7 @@ describe("claimButtonState", () => {
 });
 ```
 
-- [ ] **Step 2: Run to verify failure** — `pnpm --filter @crewmarket/mobile test -- claim-state` (or the mobile package name; check `apps/mobile/package.json` `name`). FAIL — module missing.
+- [ ] **Step 2: Run to verify failure** — `pnpm --filter @deckbook/mobile test -- claim-state` (or the mobile package name; check `apps/mobile/package.json` `name`). FAIL — module missing.
 
 - [ ] **Step 3: Implement** `apps/mobile/lib/claim-state.ts`:
 
@@ -392,7 +392,7 @@ Claude-Session: https://claude.ai/code/session_01QyyzA4ADf5wZ5L3yiNdqAw"
 - [ ] **Step 1: Add deps**
 
 ```bash
-pnpm --filter @crewmarket/mobile add better-auth @better-auth/expo expo-secure-store
+pnpm --filter @deckbook/mobile add better-auth @better-auth/expo expo-secure-store
 ```
 
 (Use the actual mobile package name from `apps/mobile/package.json`.)
@@ -408,7 +408,7 @@ import { API_URL } from "./api";
 export const authClient = createAuthClient({
   baseURL: API_URL,
   plugins: [
-    expoClient({ scheme: "crewmarket", storagePrefix: "crewmarket", storage: SecureStore }),
+    expoClient({ scheme: "deckbook", storagePrefix: "deckbook", storage: SecureStore }),
   ],
 });
 
@@ -417,7 +417,7 @@ export const { useSession, signIn, signUp, signOut } = authClient;
 
 - [ ] **Step 3: Verify typecheck + expo config**
 
-Run: `pnpm --filter @crewmarket/mobile exec tsc --noEmit` (or the package's `typecheck` script). Also confirm `app.json` scheme is `"crewmarket"` (it is). Expected: no type errors.
+Run: `pnpm --filter @deckbook/mobile exec tsc --noEmit` (or the package's `typecheck` script). Also confirm `app.json` scheme is `"deckbook"` (it is). Expected: no type errors.
 
 Note: `@better-auth/expo` requires the app scheme + secure store; both are set. If TS complains about the `expoClient` storage type, match the version's expected `SecureStore` shape (pass the module directly per Better Auth Expo docs).
 
@@ -447,7 +447,7 @@ Read the existing `src/app/index.tsx` and `_layout.tsx` first to match tokens (`
 
 - [ ] **Step 4: `_layout.tsx`** — add a header-right button: `useSession()` → if signed in, an "Account" button → `/account`; else a "Sign in" button → `/sign-in`. Match the navy header.
 
-- [ ] **Step 5: Verify** — `pnpm --filter @crewmarket/mobile exec tsc --noEmit && pnpm --filter @crewmarket/mobile lint && pnpm compliance:check`. Also `pnpm --filter @crewmarket/mobile exec expo export --platform ios` if feasible (catches bundling errors) — if the export is slow/environmental, rely on tsc+lint and note it.
+- [ ] **Step 5: Verify** — `pnpm --filter @deckbook/mobile exec tsc --noEmit && pnpm --filter @deckbook/mobile lint && pnpm compliance:check`. Also `pnpm --filter @deckbook/mobile exec expo export --platform ios` if feasible (catches bundling errors) — if the export is slow/environmental, rely on tsc+lint and note it.
 
 - [ ] **Step 6: Commit**
 
@@ -472,7 +472,7 @@ Claude-Session: https://claude.ai/code/session_01QyyzA4ADf5wZ5L3yiNdqAw"
   - `HIDDEN` → nothing.
   Match the registry-plate styling + tokens; keep copy M-1 clean.
 
-- [ ] **Step 2: Verify** — `tsc --noEmit`, `expo lint`, `pnpm compliance:check`, and `pnpm --filter @crewmarket/mobile test` (the helper test still green).
+- [ ] **Step 2: Verify** — `tsc --noEmit`, `expo lint`, `pnpm compliance:check`, and `pnpm --filter @deckbook/mobile test` (the helper test still green).
 
 - [ ] **Step 3: Commit**
 

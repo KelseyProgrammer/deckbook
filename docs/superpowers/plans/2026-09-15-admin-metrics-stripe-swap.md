@@ -94,7 +94,7 @@ describe("sumUsdBalance", () => {
 
 - [ ] **Step 2: Run to verify failure**
 
-Run: `pnpm --filter @crewmarket/payments test -- revenue`
+Run: `pnpm --filter @deckbook/payments test -- revenue`
 Expected: FAIL — module `./revenue` not found.
 
 - [ ] **Step 3: Implement the pure functions**
@@ -144,7 +144,7 @@ export function sumUsdBalance(entries: { amount: number; currency: string }[]): 
 
 - [ ] **Step 4: Run to verify pass**
 
-Run: `pnpm --filter @crewmarket/payments test -- revenue`
+Run: `pnpm --filter @deckbook/payments test -- revenue`
 Expected: 5 passing.
 
 - [ ] **Step 5: Commit**
@@ -213,7 +213,7 @@ export type { StripeRevenue } from "./revenue";
 
 - [ ] **Step 3: Verify build + existing tests**
 
-Run: `pnpm --filter @crewmarket/payments test && pnpm build`
+Run: `pnpm --filter @deckbook/payments test && pnpm build`
 Expected: payments tests green, build passes.
 
 - [ ] **Step 4: Commit**
@@ -250,8 +250,8 @@ const seams = vi.hoisted(() => ({
   stripeRevenue: vi.fn(),
 }));
 
-vi.mock("@crewmarket/db", () => ({ prisma: seams.prisma }));
-vi.mock("@crewmarket/payments", () => ({ stripeRevenue: seams.stripeRevenue }));
+vi.mock("@deckbook/db", () => ({ prisma: seams.prisma }));
+vi.mock("@deckbook/payments", () => ({ stripeRevenue: seams.stripeRevenue }));
 
 import { computeMetrics } from "./admin-metrics";
 
@@ -315,9 +315,9 @@ Rewrite the revenue portion of `apps/web/lib/admin-metrics.ts`:
 
 ```ts
 import "server-only";
-import { prisma } from "@crewmarket/db";
-import type { BookingState } from "@crewmarket/types";
-import { stripeRevenue, type StripeRevenue } from "@crewmarket/payments";
+import { prisma } from "@deckbook/db";
+import type { BookingState } from "@deckbook/types";
+import { stripeRevenue, type StripeRevenue } from "@deckbook/payments";
 import { bookingStateCounts, splitFees, verifiedProfileCount } from "./admin-metrics-rules";
 import { ttlCache } from "./ttl-cache"; // confirm the exact export name/signature first
 

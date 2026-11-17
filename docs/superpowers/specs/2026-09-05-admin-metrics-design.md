@@ -42,7 +42,7 @@ counting) are separated from the Prisma calls and unit-tested (vitest,
 Stat tiles + a booking-state table, server-rendered, zero client JS, existing
 design tokens only (mono numerals, eyebrow labels, brass only where the
 system already uses it). Money renders from cents via the existing formatter
-in `@crewmarket/types`. The revenue tile always shows the simulated label.
+in `@deckbook/types`. The revenue tile always shows the simulated label.
 
 **Aggregates only** — no per-crew earnings, no leaderboards, no orderings
 that read as ranking (M-2/P-4).

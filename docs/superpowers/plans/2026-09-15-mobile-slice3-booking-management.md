@@ -6,7 +6,7 @@
 
 **Architecture:** Booking logic today is Next server actions (not native-callable). Extract the money-critical event core into a shared `applyBookingEvent()` used by both the web action and new auth-gated JSON routes (`GET /api/bookings`, `GET /api/bookings/[id]`, `POST .../event`, `POST .../checkout`). Every list/detail read runs `withElapsedWindow` (lazy payout-on-read). Mobile restructures to expo-router tabs and adds list + detail screens; payment opens the Checkout URL in `expo-web-browser` and polls for the webhook-confirmed funds-held.
 
-**Tech Stack:** Next 15 route handlers, `@crewmarket/types` (state machine), `@crewmarket/payments`, vitest (seam-mocked prisma+session), Expo SDK 57 / expo-router tabs, expo-web-browser.
+**Tech Stack:** Next 15 route handlers, `@deckbook/types` (state machine), `@deckbook/payments`, vitest (seam-mocked prisma+session), Expo SDK 57 / expo-router tabs, expo-web-browser.
 
 **Compliance:** M-1/G-1 (copy; "funds held" never "escrow"), P-4 (party-safe projection, 404 non-parties), M-2/M-3 (EVENT_SIDES server-gated; decline penalty-free), P-2 (`withElapsedWindow` on read). Cite rule IDs in commits.
 
@@ -49,9 +49,9 @@
 
 ```ts
 import "server-only";
-import { prisma } from "@crewmarket/db";
-import { isCancelState, refundBookingPayment, refundCentsFor } from "@crewmarket/payments";
-import { canTransition, transition, type BookingEvent, type BookingState } from "@crewmarket/types";
+import { prisma } from "@deckbook/db";
+import { isCancelState, refundBookingPayment, refundCentsFor } from "@deckbook/payments";
+import { canTransition, transition, type BookingEvent, type BookingState } from "@deckbook/types";
 import { partyRoleFor, type PartyRole } from "./bookings";
 
 export type UserEvent = Exclude<
@@ -159,7 +159,7 @@ export async function bookingEventAction(bookingId: string, eventType: UserEvent
 ```
 Keep `createBookingAction` and `beginBookingCheckout` unchanged. Update `[id]/page.tsx`'s `Event` component if it imports `EVENT_SIDES`'s key type — it uses `bookingEventAction.bind(null, bookingId, event)`; the `event` values are `UserEvent`s, so retype the `Event` prop to `UserEvent` (import from lib/booking-events). Verify `[id]/page.tsx` still compiles.
 
-- [ ] **Step 3: Move + extend the tests.** The current `apps/web/app/bookings/actions.test.ts` tests `bookingEventAction`'s core (refund-first, CAS, etc.). Create `apps/web/lib/booking-events.test.ts` testing `applyBookingEvent` DIRECTLY (call it with `(userId, bookingId, event)`; mock prisma + `partyRoleFor` + `@crewmarket/payments`). Port every existing money-path assertion (weather-cancel 100% refund + stored id; failed refund throws; cancel from ACCEPTED no refund; already-refunded no double refund; CAS-lost salvage; non-party 403; invalid-event 409). Add: `availableEventsFor(state, role)` returns the right events (e.g. REQUESTED+CREW → [CREW_ACCEPT, CREW_DECLINE]; ESCROW_FUNDED+BOAT → [CANCEL_BOAT, CANCEL_WEATHER, TRIP_START]). Trim `actions.test.ts` to keep only what still tests the web wrapper (or delete cases now covered by booking-events.test.ts — don't lose coverage, just relocate).
+- [ ] **Step 3: Move + extend the tests.** The current `apps/web/app/bookings/actions.test.ts` tests `bookingEventAction`'s core (refund-first, CAS, etc.). Create `apps/web/lib/booking-events.test.ts` testing `applyBookingEvent` DIRECTLY (call it with `(userId, bookingId, event)`; mock prisma + `partyRoleFor` + `@deckbook/payments`). Port every existing money-path assertion (weather-cancel 100% refund + stored id; failed refund throws; cancel from ACCEPTED no refund; already-refunded no double refund; CAS-lost salvage; non-party 403; invalid-event 409). Add: `availableEventsFor(state, role)` returns the right events (e.g. REQUESTED+CREW → [CREW_ACCEPT, CREW_DECLINE]; ESCROW_FUNDED+BOAT → [CANCEL_BOAT, CANCEL_WEATHER, TRIP_START]). Trim `actions.test.ts` to keep only what still tests the web wrapper (or delete cases now covered by booking-events.test.ts — don't lose coverage, just relocate).
 
 - [ ] **Step 4: Verify** — `pnpm --filter web test && pnpm build && pnpm compliance:check` all green.
 
@@ -182,8 +182,8 @@ Claude-Session: https://claude.ai/code/session_01QyyzA4ADf5wZ5L3yiNdqAw"
 
 ```ts
 import "server-only";
-import type { Booking } from "@crewmarket/db";
-import { fmtUsd, type BookingState } from "@crewmarket/types";
+import type { Booking } from "@deckbook/db";
+import { fmtUsd, type BookingState } from "@deckbook/types";
 import { crewProfileById, type PartyRole } from "./bookings";
 
 export type BookingSummary = {
@@ -237,7 +237,7 @@ export { fmtUsd };
 
 - [ ] **Step 1: `POST /api/bookings/[id]/event`** — TDD. Auth; body `{ event }`; validate `event` ∈ EVENT_SIDES keys (400 otherwise); `const r = await applyBookingEvent(user.id, id, event)`; return `r.ok ? Response.json({ ok, state }) : Response.json({ error: r.error }, { status: r.status })`. Tests (mock `applyBookingEvent` OR mock its deps): 401; unknown event → 400; success → `{ok,state}`; applyBookingEvent 403/409 mapped through.
 
-- [ ] **Step 2: `POST /api/bookings/[id]/checkout`** — TDD. Auth; load booking; `partyRoleFor` must be BOAT (403); `booking.state === "ACCEPTED"` else 409; call `createBookingCheckout(...)` (same args as `beginBookingCheckout`, reuse `BETTER_AUTH_URL` base + `?paid=pending` return); return `{ url }` (NOT a redirect). Tests (mock `@crewmarket/payments` createBookingCheckout + prisma + session + partyRoleFor): 401; non-boat 403; non-ACCEPTED 409; success returns `{url}`.
+- [ ] **Step 2: `POST /api/bookings/[id]/checkout`** — TDD. Auth; load booking; `partyRoleFor` must be BOAT (403); `booking.state === "ACCEPTED"` else 409; call `createBookingCheckout(...)` (same args as `beginBookingCheckout`, reuse `BETTER_AUTH_URL` base + `?paid=pending` return); return `{ url }` (NOT a redirect). Tests (mock `@deckbook/payments` createBookingCheckout + prisma + session + partyRoleFor): 401; non-boat 403; non-ACCEPTED 409; success returns `{url}`.
 
 - [ ] **Step 3: Verify** `pnpm --filter web test && pnpm build && pnpm compliance:check`.
 
@@ -251,7 +251,7 @@ export { fmtUsd };
 
 - [ ] **Step 1: Tests** — `eventLabel(event, { rateCents })` → copy: CREW_ACCEPT→"Accept booking", CREW_DECLINE→"Decline", CANCEL_BOAT→"Cancel booking", CANCEL_CREW→"Cancel booking", CANCEL_WEATHER→"Cancel — weather", TRIP_START→"Start trip", TRIP_COMPLETE→"Trip complete". Plus a `STATE_LABELS` map matching the web (`ESCROW_FUNDED`→"Funds held", never "escrow" — G-1) and a `HOLD_FUNDS_LABEL(totalCents)`→`Hold funds — $X`. All pure.
 
-- [ ] **Step 2: Implement** `apps/mobile/lib/booking-labels.ts` — pure functions/maps, import `fmtUsd` from `@crewmarket/types`. No RN imports.
+- [ ] **Step 2: Implement** `apps/mobile/lib/booking-labels.ts` — pure functions/maps, import `fmtUsd` from `@deckbook/types`. No RN imports.
 
 - [ ] **Step 3: Verify** `pnpm --filter mobile test -- booking-labels && pnpm --filter mobile exec tsc --noEmit && pnpm compliance:check`.
 

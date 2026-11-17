@@ -99,7 +99,7 @@ routes logs keys or URLs (V-2).
 - **Row actions**: View → `POST …/view`, open `{url}` with `expo-web-browser`;
   Remove → native confirm alert, then `DELETE`.
 - **Add document**: kind picker (from the shared `Credential` zod shape via
-  `@crewmarket/types`), optional license class + expiry (`YYYY-MM-DD`) fields,
+  `@deckbook/types`), optional license class + expiry (`YYYY-MM-DD`) fields,
   then three source buttons: **Take photo** (`expo-image-picker` camera),
   **Photo library** (`expo-image-picker`), **Choose file**
   (`expo-document-picker`).

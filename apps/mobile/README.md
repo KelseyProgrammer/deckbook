@@ -3,7 +3,7 @@
 Crew-side companion app for the DECKBOOK marketplace. The crew-side UX is
 mobile-first: availability toggles, listing alerts, and quick accept/decline
 on booking requests are the north star for later slices. This app shares
-`@crewmarket/types` (workspace package) with the web app so the two clients
+`@deckbook/types` (workspace package) with the web app so the two clients
 never drift on shape.
 
 **Node:** react-native's engine range wants `^22.13.0`+ (repo `.nvmrc` pins

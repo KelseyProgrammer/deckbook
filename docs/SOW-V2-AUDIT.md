@@ -1,0 +1,57 @@
+# SOW-V2-AUDIT.md — Repo state vs. Signed SOW v2 (signed 11/9/2026 by DECKBOOK LLC)
+
+> Living gap analysis for SOW No. 2 (store launch, production cutover, maintenance). Update the Status
+> column as work lands. Statuses: ✅ done · 🟡 partial · ⬜ not started · ⛔ blocked on client.
+> SOW v1 state is frozen in `docs/SOW-AUDIT.md`. The SOW document itself is titled "Crew Market"
+> (pre-rename); see the rename note at the top of `HANDOFF.md`.
+
+## Rename: Crew Market → DECKBOOK (client request 11/2026 — not a Section 2 item; record a Scope Change Note per §5.iii)
+
+| Step | What | Status | Notes |
+|---|---|---|---|
+| 0 | Repo off iCloud Desktop → `~/Developer/deckbook`, baseline gates green | ✅ | 11/16. iCloud had left source and git files as placeholders; all restored, `git fsck` clean |
+| 1a | Workspace scope `@deckbook/*`, root package `deckbook` | ✅ | lockfile keys renamed in place |
+| 1b | User-facing copy incl. D-2 disclaimer (name substitution only) | ✅ | new D-2 wording needs client confirmation |
+| 1c | Mobile identity: name, slug, `deckbook://`, `com.deckbook.app`, SecureStore prefix | ✅ | old EAS `projectId` removed; `eas init` pending (1f) |
+| 1d | Local dev infra (`deckbook_dev`, compose names) | ✅ | new compose volumes; migrate + seed on first `docker compose up` |
+| 1e | Docs, design metadata, HANDOFF rename note | ✅ | |
+| 1f | External: GitHub repo, Vercel projects + hosts, `BETTER_AUTH_URL`, Stripe test webhook, R2 CORS, new EAS project, new preview APK, demo redeploy, drop transitional origins | ⬜ | each action confirmed with the builder first. Old names still live: `crewmarket-web`, `crewmarket-demo`, `KelseyProgrammer/crewmarket`, `@krixament/crew-market` |
+
+## Part A — Store Launch
+
+| Item | Requirement | Status | Where / notes |
+|---|---|---|---|
+| A1 | In-app account deletion, web + mobile | ⬜ | Nothing exists. Plan: Better Auth `user.deleteUser` + `beforeDelete` in `apps/web/lib/auth.ts`; new `apps/web/lib/account-deletion.ts`; block on open bookings / held funds; credential objects deleted storage-first (pattern in `apps/web/lib/credential-service.ts`, V-1 audit rows); remove `CrewProfileClaim`, close Stripe recipient account. `Booking.boatUser` cascade (`schema.prisma`) must stop deleting financial records. ⛔ credential-document retention policy is the client's written decision |
+| A2 | Production iOS build, signing, TestFlight; Stripe Checkout return re-verified on standalone | ⛔ | Needs client's Apple Developer org account (D-U-N-S). Prep unblocked: `eas.json` iOS + `submit`, `ITSAppUsesNonExemptEncryption`, privacy manifest, real icon/splash (current art is the Expo default) |
+| A3 | Production AAB, Play testing period, Android date-picker device check | ⛔ | Needs client's Google Play Console account and testers. Date picker: `apps/mobile/components/date-field.tsx` |
+| A4 | Listings, privacy labels, Data safety form, reviewer account + notes, in-app privacy + support links | ⬜ | No privacy/terms/support links exist anywhere. Homes: web footer (`apps/web/app/layout.tsx`), mobile Account tab, sign-in/up. ⛔ privacy policy URL + support contact from client |
+| A5 | Submission, up to 3 review rounds per store | ⬜ | After A1–A4. No public release until Part B is accepted (§2.i sequencing) |
+
+## Part B — Production Cutover
+
+| Item | Requirement | Status | Where / notes |
+|---|---|---|---|
+| B1 | Stripe live keys + live webhook; live onboarding; one live transaction through payout; one live refund | ⛔ | **No live keys until the client's written legal confirmation on escrow / money transmission (§6.i).** Prep unblocked: live/test key-mismatch guard, remove demo-build text. Risk: payouts release only when a booking is opened (`apps/web/lib/bookings.ts`), no scheduled job — see scope item 2 |
+| B2 | Attorney-approved ToS, Privacy, booking agreement, cancellation policy placed; acceptance recorded with version + timestamp; refund tiers and fee rate set | ⬜ | No legal pages and no versioned acceptance record (only D-2 boolean + timestamp). Tiers: `packages/payments/src/refund-tiers.ts` (all 1.0 placeholders); fee: `packages/types/src/booking-pricing.ts`. Refund idempotency key in `apps/web/lib/booking-events.ts` is only safe while tiers are 1.0. ⛔ documents and written decisions from client |
+| B3 | Remove dev-only trusted origins; production admin allowlist; backups, error monitoring, uptime; support email; purge synthetic/demo/test data; client-owned credential bucket | ⬜ | `trustedOrigins` still has `exp://`, localhost, demo host, transitional `crewmarket://`. No monitoring. Demo, `e2e-*` and `probe-*` accounts exist in production; demo passwords are committed in scripts/docs and must be rotated. Credential bucket is already Cloudflare R2 on the client's account. ⛔ admin + support emails from client. Seed removal depends on scope item 1 |
+| B4 | Transfer hosting, DB, storage, build service, repo, domain to client-owned accounts | ⛔ | Today: GitHub `KelseyProgrammer`, Vercel (builder), Neon via Vercel, EAS `krixament` (builder). No custom domain exists. Needs client owner-level accounts |
+| B5 | Signed go-live checklist + runbook | ⬜ | Draft `docs/GO-LIVE-CHECKLIST.md`, `docs/RUNBOOK.md`. Existing material: `docs/WEB-DEMO.md`, `docs/STORAGE-SWAP.md`, HANDOFF deploy notes |
+
+## Part C — Dispute-Raise Flow (optional)
+
+| Item | Requirement | Status | Where / notes |
+|---|---|---|---|
+| C | Raise-dispute flow + admin outcome screen | ⛔ | **Not authorized.** Needs attorney-approved dispute policy and a written quote approved by the client. No DISPUTED state, fields, route or admin screen exist today |
+
+## Scope decisions to raise with the client (§5.iii) — no work until confirmed
+
+1. **Real crew listings (go-live blocker).** The directory is `apps/web/data/seed-crew.json` (25 synthetic profiles); a crew member can only claim one of them. Removing synthetic data under B3 leaves an empty directory and no way to list. Needs a quote.
+2. **Scheduled payout release.** Payout fires only when someone opens the booking. Small; recommended with B1.
+3. **The rename itself** — Scope Change Note.
+4. **Webhook coverage** for chargebacks and failed transfers, and **admin MFA** (D-1) — recommended before real money.
+5. **Admin metrics accuracy.** "Trip complete" always reads 0 and "Paid out" is understated; the retainer trigger in §7.iii(b) reads completed bookings from this dashboard.
+
+## Housekeeping found during the audit
+
+- No CI exists (docs and rule G-2 say the M-1 lint runs in CI). Add a workflow: build, tests, lint, `pnpm compliance:check`.
+- `apps/web/tsconfig.json` is `strict: false` — always run `pnpm build` as well as tests.

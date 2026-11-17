@@ -1,5 +1,5 @@
 ---
-name: Crew Market
+name: DECKBOOK
 description: Tournament weigh-in board — one monumental board of full-width rows in navy, white, and brass
 colors:
   navy-deep: "#0a1d30"
@@ -166,13 +166,13 @@ components:
     padding: "10px 12px"
 ---
 
-# Design System: Crew Market
+# Design System: DECKBOOK
 
 ## Overview
 
 **Creative North Star: "The Weigh-In Board"**
 
-Crew Market's interface is a tournament weigh-in board: the kind of official results board posted
+DECKBOOK's interface is a tournament weigh-in board: the kind of official results board posted
 at a South Florida dock, read natively by the audience as *the institution speaking*. The directory
 is one monumental board of full-width rows — never a card grid. A deep navy field carries the
 banner, masthead, and footer; white rows sit on a cool grey board ground; monumental condensed

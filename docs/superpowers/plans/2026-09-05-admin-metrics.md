@@ -94,7 +94,7 @@ describe("verifiedProfileCount", () => {
 /* Pure aggregation for the admin metrics dashboard — no I/O, unit-tested.
    Aggregates only: nothing here ranks or lists individual crew (M-2/P-4). */
 
-import type { BookingState } from "@crewmarket/types";
+import type { BookingState } from "@deckbook/types";
 
 /** Funds-held lifecycle: fee is committed but not yet realized (P-2 window). */
 export const HELD_FEE_STATES: ReadonlySet<BookingState> = new Set([
@@ -150,8 +150,8 @@ export function verifiedProfileCount(rows: { profileId: string }[]): number {
 
 ```ts
 import "server-only";
-import { prisma } from "@crewmarket/db";
-import type { BookingState } from "@crewmarket/types";
+import { prisma } from "@deckbook/db";
+import type { BookingState } from "@deckbook/types";
 import { bookingStateCounts, splitFees, verifiedProfileCount } from "./admin-metrics-rules";
 
 /* Admin metrics (SOW 2.i). Every figure derives from existing rows — nothing
@@ -220,8 +220,8 @@ git commit -m "[ai-assisted] admin metrics data layer — TDD aggregation, isola
 
 ```tsx
 import { notFound } from "next/navigation";
-import { Container } from "@crewmarket/ui";
-import { fmtUsd, type BookingState } from "@crewmarket/types";
+import { Container } from "@deckbook/ui";
+import { fmtUsd, type BookingState } from "@deckbook/types";
 import { sessionUser } from "../../../lib/bookings";
 import { isAdminEmail } from "../../../lib/credential-rules";
 import { computeMetrics } from "../../../lib/admin-metrics";
@@ -233,7 +233,7 @@ import { computeMetrics } from "../../../lib/admin-metrics";
 // self-documenting defense-in-depth: never statically cached
 export const dynamic = "force-dynamic";
 
-export const metadata = { title: "Metrics — Crew Market" };
+export const metadata = { title: "Metrics — DECKBOOK" };
 
 const STATE_LABELS: Record<BookingState, string> = {
   REQUESTED: "Requested",

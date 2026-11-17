@@ -43,7 +43,7 @@ listed as scope, not tasks; its full-granularity plan is written the day the dir
 > 3. The 0.3 cell-count assertion uses `/avail-strip__day(?!-)/g` — the modifier class
 >    contains the base class as a substring, so the plan's original regex double-counts.
 
-### Task 0.1 — Test infrastructure for `@crewmarket/ui`
+### Task 0.1 — Test infrastructure for `@deckbook/ui`
 
 **Files:**
 - Modify: `packages/ui/package.json`
@@ -53,7 +53,7 @@ listed as scope, not tasks; its full-granularity plan is written the day the dir
 
 - [ ] Add dev dependencies and test script:
   ```bash
-  pnpm --filter @crewmarket/ui add -D vitest react react-dom
+  pnpm --filter @deckbook/ui add -D vitest react react-dom
   ```
 - [ ] In `packages/ui/package.json`, add to the top level:
   ```json
@@ -69,9 +69,9 @@ listed as scope, not tasks; its full-granularity plan is written the day the dir
   ```
 - [ ] Verify the runner boots (expected: "no test files found" exit, not a config error):
   ```bash
-  pnpm --filter @crewmarket/ui test || true
+  pnpm --filter @deckbook/ui test || true
   ```
-- [ ] Commit: `[ai-assisted] vitest infra for @crewmarket/ui (no rules touched)`
+- [ ] Commit: `[ai-assisted] vitest infra for @deckbook/ui (no rules touched)`
 
 ### Task 0.2 — `availabilityWindow` helper (TDD)
 
@@ -130,7 +130,7 @@ export function availabilityWindow(
   ```
 - [ ] Run and watch it fail (module doesn't exist yet):
   ```bash
-  pnpm --filter @crewmarket/ui test
+  pnpm --filter @deckbook/ui test
   ```
 - [ ] Create `packages/ui/src/availability.tsx`:
   ```tsx
@@ -157,7 +157,7 @@ export function availabilityWindow(
   ```
 - [ ] Run to green:
   ```bash
-  pnpm --filter @crewmarket/ui test
+  pnpm --filter @deckbook/ui test
   ```
 - [ ] Add to `packages/ui/src/index.ts` exports:
   ```ts
@@ -245,7 +245,7 @@ export function AvailabilityStrip(props: {
   ```
 - [ ] Run to green:
   ```bash
-  pnpm --filter @crewmarket/ui test
+  pnpm --filter @deckbook/ui test
   ```
 - [ ] Confirm the export line from Task 0.2 now resolves (typecheck via build):
   ```bash
@@ -270,7 +270,7 @@ restyle can paraphrase it (D-2 requires verbatim).
   import { DisclaimerD2 } from "./components";
 
   const D2 =
-    "Crew Market is a directory and booking marketplace. We are not an employer, " +
+    "DECKBOOK is a directory and booking marketplace. We are not an employer, " +
     "crewing agency, or vessel operator. Vessel owners are solely responsible for " +
     "crew selection, vessel operation, and legal compliance including insurance.";
 
@@ -287,11 +287,11 @@ restyle can paraphrase it (D-2 requires verbatim).
 - [ ] Run to green (it should pass immediately against the existing component; if it fails,
   the component drifted — fix the component, never the constant):
   ```bash
-  pnpm --filter @crewmarket/ui test
+  pnpm --filter @deckbook/ui test
   ```
 - [ ] Commit: `[ai-assisted] D-2 verbatim invariant test (rule D-2)`
 
-**Phase 0 exit criteria:** `pnpm --filter @crewmarket/ui test` green (7 tests),
+**Phase 0 exit criteria:** `pnpm --filter @deckbook/ui test` green (7 tests),
 `pnpm compliance:check` green, `pnpm --filter web build` green, no visible change to the
 running site (the strip exists but nothing renders it yet — the incumbent look is untouched
 until the client locks a direction).

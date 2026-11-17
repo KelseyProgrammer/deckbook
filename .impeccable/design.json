@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "generatedAt": "2026-09-01T00:00:00Z",
-  "title": "Design System: Crew Market",
+  "title": "Design System: DECKBOOK",
   "extensions": {
     "colorMeta": {
       "navy-deep": {
@@ -387,7 +387,7 @@
   ],
   "narrative": {
     "northStar": "The Weigh-In Board",
-    "overview": "Crew Market's interface is a tournament weigh-in board: the kind of official results board posted at a South Florida dock, read natively by the audience as the institution speaking. The directory is one monumental board of full-width rows \u2014 never a card grid. A deep navy field carries the banner, masthead, and footer; white rows sit on a cool grey board ground; monumental condensed caps (Oswald) are the matter of the page, not decoration on it; and brass appears only where it has a defined meaning, like metal hardware on a boat. Hovering a row inverts it to navy \u2014 the board lights the lane you're on. This world replaced the retired \"Engraved Registry\" system wholesale (direction locked by the client 2026-09-01: probe C, concept-seed cc54bbda index 6, artifact caf986f4). Crucially, the board lists \u2014 it never ranks. A board of rows wants to read as a leaderboard; the system refuses that structurally, because implied ranking is a compliance hazard (M-2/P-4), not just a taste call.",
+    "overview": "DECKBOOK's interface is a tournament weigh-in board: the kind of official results board posted at a South Florida dock, read natively by the audience as the institution speaking. The directory is one monumental board of full-width rows \u2014 never a card grid. A deep navy field carries the banner, masthead, and footer; white rows sit on a cool grey board ground; monumental condensed caps (Oswald) are the matter of the page, not decoration on it; and brass appears only where it has a defined meaning, like metal hardware on a boat. Hovering a row inverts it to navy \u2014 the board lights the lane you're on. This world replaced the retired \"Engraved Registry\" system wholesale (direction locked by the client 2026-09-01: probe C, concept-seed cc54bbda index 6, artifact caf986f4). Crucially, the board lists \u2014 it never ranks. A board of rows wants to read as a leaderboard; the system refuses that structurally, because implied ranking is a compliance hazard (M-2/P-4), not just a taste call.",
     "keyCharacteristics": [
       "One monumental board: full-width white rows on a grey ground under a navy banner \u2014 no cards",
       "Brass as a closed ledger of meanings: verification, primary action, open-day fill, display accent",

@@ -1,4 +1,4 @@
-# Crew Market
+# DECKBOOK
 
 A two-sided marketplace for the sportfishing industry. **Crew** — mates, deckhands,
 and licensed captains — list their services, credentials, and availability. **Boats** —
@@ -11,7 +11,7 @@ with payment held until the trip is done.
 
 ## What it is — and what it isn't
 
-Crew Market is a **directory and booking marketplace**. It is not an employer, a
+DECKBOOK is a **directory and booking marketplace**. It is not an employer, a
 crewing agency, or a vessel operator. Crew are independent contractors: they set their
 own rates, accept or decline any job without penalty, and work with as many boats as
 they choose. The platform introduces the two sides, facilitates payment, and steps back.

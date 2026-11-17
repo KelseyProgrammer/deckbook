@@ -22,7 +22,7 @@ no `POST /api/bookings` — the route file only has GET.
 
 Two facts discovered in exploration that shape the design:
 
-1. **Mobile already imports `@crewmarket/types` directly** (labels, api, booking
+1. **Mobile already imports `@deckbook/types` directly** (labels, api, booking
    screens). The money math (`computeQuote`, `tripTypesFor`, `maxDaysFor`, `fmtUsd`,
    `PLATFORM_FEE_RATE`, `PLATFORM_FEE_SIDE`, `TRIP_TYPE_LABELS`) needs **no mirror** —
    the native form uses the exact functions the web form uses, preview-only.
@@ -132,9 +132,9 @@ not a tab.
     review". Quote from `computeQuote` — preview only (R4).
   - **P&I attestation** — required checkbox, verbatim web sentence (D-4), same
     checkbox pattern as the D-2 sign-up checkbox.
-  - Agreement note ("…Crew Market keeps the ledger and holds the funds; it is not a
+  - Agreement note ("…DECKBOOK keeps the ledger and holds the funds; it is not a
     party to the agreement…") and the M-3 line ("declining never costs crew anything
-    on Crew Market") verbatim.
+    on DECKBOOK") verbatim.
   - Submit — brass button, label `Send request — <total> held at booking` when the
     quote and date are set; disabled until `canSubmit`; double-tap guarded (slice-4
     V-2 lesson generalized); `authClient.$fetch` with the **absolute URL**
