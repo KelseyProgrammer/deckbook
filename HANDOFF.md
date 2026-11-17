@@ -11,7 +11,8 @@
 > projects renamed `deckbook-web` / `deckbook-demo`, live at https://deckbook-web.vercel.app and
 > https://deckbook-demo.vercel.app; `BETTER_AUTH_URL` and the Stripe test webhook (`we_1UFyBb…`, same
 > signing secret) moved to the new web host; new EAS project `@krixament/deckbook` (id b22a98af) with
-> a new cloud keystore for `com.deckbook.app`. **Still to do:** add the two new hosts to the R2
+> a new cloud keystore for `com.deckbook.app`; preview APK build 22505efc FINISHED (install QR on its
+> expo.dev build page) — not yet installed or sign-in-checked on a device. **Still to do:** add the two new hosts to the R2
 > bucket CORS policy in the Cloudflare dashboard (`docs/STORAGE-SWAP.md` step 3 — until then browser
 > credential uploads only work from the old hosts); then remove the old `crewmarket-*.vercel.app`
 > host aliases and the transitional `crewmarket://` + old-host entries in `apps/web/lib/auth.ts`
