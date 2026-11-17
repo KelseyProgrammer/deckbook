@@ -18,7 +18,11 @@
 > `trustedOrigins` entries are removed, which retires the pre-rename test APK
 > (`com.crewmarket.app`, baked to the old API host). The new APK has not been installed on Android
 > hardware (no device available) — sign-in with the `deckbook://` origin was checked against the
-> live API by request only (200; untrusted origin 403). SOW v2 (signed 11/9/2026) is the current scope;
+> live API by request only (200; untrusted origin 403). **Logo, 11/17/2026:** the client logo is
+> vectorized in `assets/brand/` and placed on the web masthead, favicon and share image, and on the
+> mobile icon, adaptive icon, splash and tab header (`scripts/build-brand-assets.mjs` regenerates
+> every raster); web and demo redeployed; preview APK build a5942ba9 FINISHED and supersedes 22505efc
+> (not installed on a device; the iOS `expo.icon` file is unchecked until an iOS build exists). SOW v2 (signed 11/9/2026) is the current scope;
 > the working plan is tracked in `docs/SOW-V2-AUDIT.md`.
 
 ## Who / what

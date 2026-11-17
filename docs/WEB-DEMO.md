@@ -1,6 +1,6 @@
 # Web demo — shipping the Expo build as a shareable link
 
-> **Live:** https://deckbook-demo.vercel.app (first deployed 2026-10-01, redeployed under the DECKBOOK name 2026-11-16, via the recipe
+> **Live:** https://deckbook-demo.vercel.app (first deployed 2026-10-01, redeployed under the DECKBOOK name 2026-11-16 and with the new logo 2026-11-17, via the recipe
 > below; Vercel project `deckbook-demo`, git auto-deploy deliberately disconnected —
 > redeploys are CLI-only, re-export then `vercel deploy --prod` from `apps/mobile/dist`).
 
