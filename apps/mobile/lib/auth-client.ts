@@ -6,7 +6,7 @@ import { API_URL } from "./api";
 export const authClient = createAuthClient({
   baseURL: API_URL,
   plugins: [
-    expoClient({ scheme: "crewmarket", storagePrefix: "crewmarket", storage: SecureStore }),
+    expoClient({ scheme: "deckbook", storagePrefix: "deckbook", storage: SecureStore }),
   ],
 });
 
