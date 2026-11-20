@@ -2147,8 +2147,8 @@
       "id": "00000000-0000-4000-8000-000000000023",
       "displayName": "Reef Nakata",
       "roles": [
-        "DECKHAND",
-        "SECOND_CAPTAIN"
+        "SONAR_OPERATOR",
+        "CAPTAIN"
       ],
       "homePort": "Islamorada, FL",
       "regions": [
@@ -2166,7 +2166,7 @@
       ],
       "dayRateUsd": 450,
       "halfDayRateUsd": 293,
-      "bio": "Delivery-capable, keeps a tight log, treats every trip like a survey run.",
+      "bio": "Tournament sonar seat — tuned for the conditions, clear calls to the bridge, no guesswork.",
       "photoRefs": [],
       "credentials": [
         {

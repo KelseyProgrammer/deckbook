@@ -18,6 +18,7 @@ const ROLE_OPTIONS: readonly [string, string][] = [
   ["ENGINEER", "Engineer"],
   ["COOK", "Cook"],
   ["STEWARDESS", "Stewardess"],
+  ["SONAR_OPERATOR", "Sonar Operator"],
 ];
 
 function dateChips(windowStart: string | undefined, days = 14): { value: string; label: string }[] {

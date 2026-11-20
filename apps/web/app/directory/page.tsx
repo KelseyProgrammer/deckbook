@@ -15,6 +15,7 @@ const ROLE_OPTIONS = [
   ["ENGINEER", "Engineer"],
   ["COOK", "Cook"],
   ["STEWARDESS", "Stewardess"],
+  ["SONAR_OPERATOR", "Sonar Operator"],
 ] as const;
 
 type Search = { role?: string; port?: string; date?: string; verified?: string };

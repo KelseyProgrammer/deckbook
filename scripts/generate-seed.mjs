@@ -45,12 +45,21 @@ const BIOS = [
   "Delivery-capable, keeps a tight log, treats every trip like a survey run.",
 ];
 
+// Secondary-role pick pool. SONAR_OPERATOR is deliberately NOT in it: growing this array
+// shifts the PRNG picks and reshuffles secondary roles on unrelated profiles (the demo and
+// e2e scripts select profiles by role). It is assigned as a primary role below instead.
 const ROLES = ["MATE", "DECKHAND", "CAPTAIN", "SECOND_CAPTAIN", "ENGINEER", "COOK", "STEWARDESS"];
 
 // Interior-crew bios kept in a separate pool so BIOS picks for deck roles don't shift.
 const STEW_BIOS = [
   "Interior squared away before the boat leaves the slip. Provisioning lists down cold.",
   "Salon, cabins, galley support — owner's guests looked after from lines-out to washdown.",
+];
+
+// Sonar-operator bios, same separate-pool reasoning.
+const SONAR_BIOS = [
+  "Omni sonar specialist. Reads the marks, calls the turn, keeps the boat on the fish.",
+  "Tournament sonar seat — tuned for the conditions, clear calls to the bridge, no guesswork.",
 ];
 
 function credentialFor(role, i, verifiedBias) {
@@ -84,7 +93,7 @@ function availability(days) {
 
 const profiles = [];
 for (let i = 0; i < 25; i++) {
-  const primaryRole = i < 7 ? "CAPTAIN" : i < 9 ? "SECOND_CAPTAIN" : i < 18 ? "MATE" : i < 23 ? "DECKHAND" : i < 24 ? pick(["ENGINEER", "COOK"]) : "STEWARDESS";
+  const primaryRole = i < 7 ? "CAPTAIN" : i < 9 ? "SECOND_CAPTAIN" : i < 18 ? "MATE" : i < 22 ? "DECKHAND" : i < 23 ? "SONAR_OPERATOR" : i < 24 ? pick(["ENGINEER", "COOK"]) : "STEWARDESS";
   const roles = [primaryRole, ...(rand() < 0.35 ? picks(ROLES.filter((r) => r !== primaryRole), 1) : [])];
   const isCapt = primaryRole === "CAPTAIN" || primaryRole === "SECOND_CAPTAIN";
   const dayRateUsd = isCapt ? 500 + Math.floor(rand() * 9) * 50 : 250 + Math.floor(rand() * 9) * 25; // rule M-2: crew-set rates (synthetic here)
@@ -100,7 +109,7 @@ for (let i = 0; i < 25; i++) {
     dayRateUsd,
     ...(rand() < 0.6 ? { halfDayRateUsd: Math.round(dayRateUsd * 0.65) } : {}),
     ...(rand() < 0.4 ? { tournamentRateUsd: Math.round(dayRateUsd * 1.6) } : {}),
-    bio: primaryRole === "STEWARDESS" ? pick(STEW_BIOS) : pick(BIOS),
+    bio: primaryRole === "STEWARDESS" ? pick(STEW_BIOS) : primaryRole === "SONAR_OPERATOR" ? pick(SONAR_BIOS) : pick(BIOS),
     photoRefs: [],
     credentials: credentialFor(primaryRole, i, isCapt ? 0.75 : 0.5),
     availability: availability(14),
