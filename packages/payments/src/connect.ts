@@ -55,3 +55,12 @@ export async function payoutReadiness(accountId: string): Promise<PayoutReadines
     transfersEnabled: caps?.stripe_transfers?.status === "active",
   };
 }
+
+/** Account deletion (SOW v2 A1): removes platform access to the crew member's
+    recipient account. Stripe requires every applied configuration to be named;
+    ours is recipient-only. Throws on failure — the caller decides what that means. */
+export async function closeRecipientAccount(accountId: string): Promise<void> {
+  await stripeClient().v2.core.accounts.close(accountId, {
+    applied_configurations: ["recipient"],
+  });
+}
