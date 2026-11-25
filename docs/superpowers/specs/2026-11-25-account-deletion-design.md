@@ -52,14 +52,15 @@ idempotent, so a retry after a partial failure is safe.
    verified docs leave the existing `CredentialDocDeletion` metadata record (V-1, V-2, client
    policy 2026-10-06). The row-removal core of `deleteDoc` is extracted to a shared
    `removeDocRecord(doc)` in `credential-service.ts`; both callers use it.
-3. Stripe recipient account, if the claim holds a `stripeAccountId`:
-   `closeRecipientAccount(id)` (new, `packages/payments/src/connect.ts`) calls
-   `v2.core.accounts.close(id, { applied_configurations: ["recipient"] })`. Failure does **not**
-   block deletion; the outcome is recorded (step 4) for the operator. Only the account id is ever
-   stored (P-1).
-4. One transaction: re-count open bookings for the claimed profile (closes the race with a
+3. One transaction: re-count open bookings for the claimed profile (closes the race with a
    request arriving mid-delete; non-zero → abort), upsert `AccountDeletionRecord`, delete the
    `CrewProfileClaim`.
+4. Stripe recipient account, if the record holds a `stripeAccountId` not yet closed:
+   `closeRecipientAccount(id)` (new, `packages/payments/src/connect.ts`) calls
+   `v2.core.accounts.close(id, { applied_configurations: ["recipient"] })`. Failure does **not**
+   block deletion; the outcome is written to the record for the operator. The id is read from
+   `AccountDeletionRecord`, not the claim, so a retry after the claim is gone still closes it. Only the account id is ever
+   stored (P-1).
 5. Return. Better Auth then deletes the user; `Session` and `Account` rows cascade.
 
 ## Schema (one Prisma migration)
@@ -76,7 +77,7 @@ model AccountDeletionRecord {
   id               String   @id            // the deleted user's id — retries can't double-log
   accountType      String
   stripeAccountId  String?                 // id only (P-1)
-  stripeCloseState String?                 // "CLOSED" | "FAILED" | null (no Stripe account)
+  stripeCloseState String?                 // "CLOSED" | "FAILED" | null (none, or not yet attempted)
   deletedAt        DateTime @default(now())
   @@map("account_deletion_record")
 }
