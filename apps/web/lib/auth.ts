@@ -4,6 +4,7 @@ import { nextCookies } from "better-auth/next-js";
 import { expo } from "@better-auth/expo";
 import { APIError } from "better-auth/api";
 import { prisma } from "@deckbook/db";
+import { prepareAccountDeletion } from "./account-deletion";
 import { isAdminEmail } from "./credential-rules";
 
 /* Accounts & Roles (SOW 2.i). Two account types only: CREW offers services, BOAT books
@@ -33,6 +34,18 @@ export const auth = betterAuth({
       // Rule D-2: signup requires attesting the marketplace disclaimer.
       disclaimerAccepted: { type: "boolean", required: true, input: true },
       disclaimerAcceptedAt: { type: "date", required: false, input: false },
+    },
+    // In-app account deletion (SOW v2 A1). Both apps send the password; without one
+    // Better Auth only accepts a session younger than freshAge. All rules live in
+    // lib/account-deletion.ts — a throw there aborts and leaves the account whole.
+    // Arrow wrapper on purpose: account-deletion → bookings → auth is an import
+    // cycle, so the binding must be read at call time, not at module load.
+    deleteUser: {
+      enabled: true,
+      beforeDelete: async (user) => {
+        const u = user as typeof user & { accountType?: string };
+        await prepareAccountDeletion({ id: u.id, email: u.email, accountType: u.accountType });
+      },
     },
   },
   databaseHooks: {
