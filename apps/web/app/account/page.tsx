@@ -90,6 +90,17 @@ export default async function Account({
             ))}
           </ul>
         </div>
+
+        <div className="account__panel">
+          <span className="eyebrow">DELETE ACCOUNT</span>
+          <p className="account__lede">
+            Remove your sign-in and personal details from DECKBOOK. You&apos;ll see exactly what
+            is removed and what is kept before anything happens.
+          </p>
+          <a className="btn btn--ghost-ink" href="/account/delete">
+            Delete account
+          </a>
+        </div>
       </Container>
     </main>
   );
