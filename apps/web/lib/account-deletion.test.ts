@@ -20,8 +20,8 @@ const seams = vi.hoisted(() => {
       $transaction: vi.fn(async (fn: (t: typeof tx) => Promise<unknown>) => fn(tx)),
     },
     withElapsedWindow: vi.fn(async (b: unknown) => b),
-    removeDocRecord: vi.fn(async (_doc: unknown) => undefined),
-    closeRecipientAccount: vi.fn(async (_id: string) => undefined),
+    removeDocRecord: vi.fn<(doc: unknown) => Promise<void>>(async () => undefined),
+    closeRecipientAccount: vi.fn<(id: string) => Promise<void>>(async () => undefined),
     order: [] as string[],
   };
 });
