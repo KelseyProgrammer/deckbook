@@ -5,6 +5,7 @@ const seams = vi.hoisted(() => ({
   prisma: {
     crewProfileClaim: { findUnique: vi.fn(), create: vi.fn() },
     credentialDoc: { count: vi.fn() },
+    booking: { count: vi.fn() },
   },
 }));
 
@@ -31,6 +32,7 @@ beforeEach(() => {
   seams.getSession.mockResolvedValue({ user: CREW });
   seams.prisma.crewProfileClaim.findUnique.mockResolvedValue(null); // no existing claim (either key)
   seams.prisma.credentialDoc.count.mockResolvedValue(0);
+  seams.prisma.booking.count.mockResolvedValue(0);
   seams.prisma.crewProfileClaim.create.mockResolvedValue({ userId: "u1", profileId: "p-known" });
 });
 
@@ -61,6 +63,16 @@ describe("POST /api/claim", () => {
   it("409 (V-2) when the profile has credential docs", async () => {
     seams.prisma.credentialDoc.count.mockResolvedValue(2);
     expect((await post({ profileId: "p-known" })).status).toBe(409);
+    expect(seams.prisma.crewProfileClaim.create).not.toHaveBeenCalled();
+  });
+  it("409 when the profile has booking history from a previous account", async () => {
+    seams.prisma.booking.count.mockResolvedValue(3);
+    const res = await post({ profileId: "p-known" });
+    expect(res.status).toBe(409);
+    expect(await res.json()).toEqual({
+      error: "This profile has booking history and can't be claimed here.",
+    });
+    expect(seams.prisma.booking.count).toHaveBeenCalledWith({ where: { crewProfileId: "p-known" } });
     expect(seams.prisma.crewProfileClaim.create).not.toHaveBeenCalled();
   });
   it("200 and creates the claim on the happy path", async () => {

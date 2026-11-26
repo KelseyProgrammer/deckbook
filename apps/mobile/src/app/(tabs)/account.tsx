@@ -10,7 +10,7 @@ import { color, font, radius, space } from "../../../lib/tokens";
 
 /* Account screen (slice 2, Task 6). Shows who's signed in and — for crew — the
    profile they drive on the board. No booking management here (that stays on the
-   web); this is identity + a way out. Marketplace vocabulary only (M-1). */
+   web); this is identity, a way out, and the entry to account deletion (SOW v2 A1). Marketplace vocabulary only (M-1). */
 
 const ACCOUNT_TYPE_LABELS: Record<string, string> = {
   CREW: "Crew account",
@@ -176,6 +176,14 @@ export default function AccountScreen() {
       >
         <Text style={styles.signOutText}>{signingOut ? "Signing out…" : "Sign out"}</Text>
       </Pressable>
+
+      <Pressable
+        style={styles.deleteLink}
+        onPress={() => router.push("/delete-account")}
+        accessibilityRole="button"
+      >
+        <Text style={styles.deleteLinkText}>Delete account</Text>
+      </Pressable>
     </ScrollView>
   );
 }
@@ -272,6 +280,20 @@ const styles = StyleSheet.create({
   },
   signOutDisabled: { opacity: 0.5 },
   signOutText: { fontFamily: font.body, fontSize: 15, fontWeight: "600", color: color.brassText },
+
+  deleteLink: {
+    marginTop: space.s4,
+    marginHorizontal: space.s3,
+    minHeight: 48,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  deleteLinkText: {
+    fontFamily: font.body,
+    fontSize: 14,
+    color: color.inkSoft,
+    textDecorationLine: "underline",
+  },
 
   retry: {
     alignItems: "center",

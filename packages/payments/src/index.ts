@@ -6,7 +6,7 @@
  * account. Stripe owns all KYC/bank/tax data — this package touches ids only.
  * Server-side only: import from server actions / route handlers exclusively.
  */
-export { createExpressAccount, createOnboardingLink, payoutReadiness } from "./connect";
+export { closeRecipientAccount, createExpressAccount, createOnboardingLink, payoutReadiness } from "./connect";
 export type { PayoutReadiness } from "./connect";
 export {
   createBookingCheckout,

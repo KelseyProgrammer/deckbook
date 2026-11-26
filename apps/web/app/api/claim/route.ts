@@ -20,10 +20,11 @@ export async function POST(req: Request) {
     return Response.json({ error: "Unknown profile." }, { status: 404 });
   }
 
-  const [mine, taken, docCount] = await Promise.all([
+  const [mine, taken, docCount, bookingCount] = await Promise.all([
     prisma.crewProfileClaim.findUnique({ where: { userId: user.id } }),
     prisma.crewProfileClaim.findUnique({ where: { profileId } }),
     prisma.credentialDoc.count({ where: { profileId } }),
+    prisma.booking.count({ where: { crewProfileId: profileId } }),
   ]);
   if (mine) return Response.json({ error: "You already drive a profile." }, { status: 409 });
   if (taken) return Response.json({ error: "This profile is already claimed." }, { status: 409 });
@@ -31,6 +32,16 @@ export async function POST(req: Request) {
     // V-2: never hand a stranger's uploaded documents to a new owner via self-claim.
     return Response.json(
       { error: "This profile has documents on file and can't be claimed here." },
+      { status: 409 }
+    );
+  }
+
+  if (bookingCount > 0) {
+    // Bookings are keyed to the profile, not the person. After an account deletion
+    // frees a claim, a new claimant must never inherit the previous person's
+    // booking ledger (D-1).
+    return Response.json(
+      { error: "This profile has booking history and can't be claimed here." },
       { status: 409 }
     );
   }

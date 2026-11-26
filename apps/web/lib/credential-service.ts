@@ -1,5 +1,5 @@
 import { createId } from "@paralleldrive/cuid2";
-import { prisma } from "@deckbook/db";
+import { prisma, type CredentialDoc } from "@deckbook/db";
 import { claimedProfileId, sessionUser } from "./bookings";
 import { CREDENTIAL_KINDS, s3KeyFor, validateUpload } from "./credential-rules";
 import { deleteObject, headObject, presignedGet, presignedPut } from "./credential-storage";
@@ -152,30 +152,37 @@ export async function deleteDoc(
   if (!doc || doc.profileId !== ctx.profileId || doc.uploadedByUserId !== ctx.user.id) {
     return { error: "not found", status: 404 };
   }
-  await deleteObject(doc.s3Key); // S3 first — if this throws, the row survives and Remove can be retried (V-2)
-  if (doc.verifiedAt) {
-    // one transaction: the audit record and the row delete land together or not at
-    // all, so a retried Remove can never double-log or lose the record
-    await prisma.$transaction([
-      prisma.credentialDocDeletion.create({
-        data: {
-          id: doc.id,
-          profileId: doc.profileId,
-          uploadedByUserId: doc.uploadedByUserId,
-          kind: doc.kind,
-          licenseClass: doc.licenseClass,
-          expiresAt: doc.expiresAt,
-          uploadedAt: doc.uploadedAt,
-          verifiedAt: doc.verifiedAt,
-          verifiedByEmail: doc.verifiedByEmail,
-        },
-      }),
-      prisma.credentialDoc.delete({ where: { id: doc.id } }),
-    ]);
-  } else {
-    await prisma.credentialDoc.delete({ where: { id: doc.id } });
-  }
+  await removeDocRecord(doc);
   return {};
+}
+
+/** Storage-first removal of one document — shared by owner Remove and account
+    deletion; never re-implement it. S3 first: if that throws, the row survives and
+    the caller can retry (V-2). A verified doc leaves the metadata-only
+    CredentialDocDeletion record in the same transaction as the row delete, so a
+    retry can never double-log or lose it. Callers do their own authorization. */
+export async function removeDocRecord(doc: CredentialDoc): Promise<void> {
+  await deleteObject(doc.s3Key);
+  if (!doc.verifiedAt) {
+    await prisma.credentialDoc.delete({ where: { id: doc.id } });
+    return;
+  }
+  await prisma.$transaction([
+    prisma.credentialDocDeletion.create({
+      data: {
+        id: doc.id,
+        profileId: doc.profileId,
+        uploadedByUserId: doc.uploadedByUserId,
+        kind: doc.kind,
+        licenseClass: doc.licenseClass,
+        expiresAt: doc.expiresAt,
+        uploadedAt: doc.uploadedAt,
+        verifiedAt: doc.verifiedAt,
+        verifiedByEmail: doc.verifiedByEmail,
+      },
+    }),
+    prisma.credentialDoc.delete({ where: { id: doc.id } }),
+  ]);
 }
 
 /** Owner-only short-lived view URL for their own document (V-2). */

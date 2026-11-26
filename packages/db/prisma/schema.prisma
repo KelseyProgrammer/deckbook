@@ -36,7 +36,6 @@ model User {
 
   sessions Session[]
   accounts Account[]
-  bookings Booking[] @relation("BoatBookings")
   credentialDocs CredentialDoc[] @relation("UserCredentialDocs")
 
   @@unique([email])
@@ -52,8 +51,9 @@ model User {
 model Booking {
   id            String @id @default(cuid())
   crewProfileId String // seed registry profile (crew accounts drive it via CrewProfileClaim)
+  // No User relation on purpose: bookings are financial records and must survive
+  // account deletion (SOW v2 A1). The id stays as a pseudonymous reference.
   boatUserId    String
-  boatUser      User   @relation("BoatBookings", fields: [boatUserId], references: [id], onDelete: Cascade)
 
   tripType  String
   dates     Json // ISO "YYYY-MM-DD" strings, coarse dates only (D-3)
@@ -106,7 +106,7 @@ model CredentialDoc {
   id               String    @id @default(cuid())
   profileId        String // seed registry profile; uploader must hold its CrewProfileClaim
   uploadedByUserId String
-  uploadedBy       User      @relation("UserCredentialDocs", fields: [uploadedByUserId], references: [id], onDelete: Cascade) // TODO(account-deletion): delete the S3 object BEFORE this cascade fires — the DB cascade alone orphans the doc (V-2)
+  uploadedBy       User      @relation("UserCredentialDocs", fields: [uploadedByUserId], references: [id], onDelete: Cascade) // account deletion removes the S3 object first (lib/account-deletion.ts); this cascade is only a backstop (V-2)
   kind             String // Credential.kind values from packages/types only
   licenseClass     String?
   expiresAt        DateTime?
@@ -141,6 +141,20 @@ model CredentialDocDeletion {
 
   @@index([profileId])
   @@map("credential_doc_deletion")
+}
+
+// Account deletion audit (SOW v2 A1). Minimal operator trail: which account type
+// was deleted and whether its Stripe recipient account closed. Id only for Stripe
+// (P-1); no name, email, or any other personal field (D-1). No User relation on
+// purpose — it must survive the deletion it records.
+model AccountDeletionRecord {
+  id               String   @id // the deleted user's id — retries can't double-log
+  accountType      String
+  stripeAccountId  String?
+  stripeCloseState String? // "CLOSED" | "FAILED" | null (no Stripe account, or close not yet attempted)
+  deletedAt        DateTime @default(now())
+
+  @@map("account_deletion_record")
 }
 
 model Session {
